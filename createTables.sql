@@ -100,7 +100,7 @@ CREATE TABLE dbo.IntervencaoPeriodica (
 
 CREATE TABLE dbo.EquipaIntervencao (
 	idIntervencao int not null,
-	equipaId int not null, 
+	equipaId int, 
 	dataAlteracao date,
 	PRIMARY KEY (idIntervencao,dataAlteracao),
 	FOREIGN KEY (idIntervencao) REFERENCES Intervencao(id),
