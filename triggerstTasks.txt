@@ -1,0 +1,30 @@
+
+1. Pretende-se manter o registo histórico do valor comercial do activo, em euros, registando-se a data (no
+formato dd-mm-aaaa) em que a alteração ocorreu. Tabela Ativos Condicion -> On update in Ativos do -> insert new line on Historico ativos (ID, DATA, VALOR)
+
+2. A data de intervencao deve ser superior à data de aquisicao do activo intervencionado. 
+Tabela Intervencao Condition -> On insert And Update , check if ativos.dtAquisicao < Intervencao.dtInicio 
+
+3. Cada intervencao e realizada por uma equipa de manutenucao constitu´ıda, no m´ınimo, por 2 elementos. Um deles ser´a o supervisor.
+
+On dbo.EquipaIntervencao Condition -> check Equipa.Nfunc >= 2 -> on insert and Update
+
+
+4.Cada equipa so consegue realizar uma interven¸c˜ao de cada
+vez, podendo ter at´e 3 interven¸c˜oes atribu´ıdas.
+
+On dbo.EquipaIntervencao Condition -> check count (intervencao.estado ="em execucao") =1 and check count (intervencao.estado  IN ("“em an´alise”,
+“em execu¸c˜ao”") < = 3) ON INSERT AND UPDATE
+
+ Cada equipa s´o consegue realizar uma interven¸c˜ao de cada
+vez, podendo ter at´e 3 interven¸c˜oes atribu´ıdas. Se n˜ao for poss´ıvel attribu´ır uma equipa, o estado
+da interven¸c˜ao deve ser “por atribuir”. Note-se que a equipe pode mudar ao longo da resolu¸c˜ao
+da interven¸c˜ao, devendo ficar registadas todas as equipas envolvidas, garantindo que ´e poss´ıvel
+orden´a-las de forma cronol´ogica.
+
+
+5. Existe uma pessoa da empresa que gere o activo e que
+n˜ao pode participar na equipa que faz a interven¸c˜ao desse activo.
+
+6.A atribu´ı¸c˜ao de uma interven¸c˜ao a uma
+equipa s´o ´e poss´ıvel se a descri¸c˜ao for compat´ıvel com as competˆencias da equipa.
