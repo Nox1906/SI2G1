@@ -30,7 +30,8 @@ CREATE OR ALTER PROCEDURE SP_criaInter
 	@dtInicio date,
 	@dtFim date,
 	@valor money,
-	@ativoId int
+	@ativoId int,
+	@meses int
 
 AS	
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED  --Apenas estou a ler uma vez
@@ -39,11 +40,13 @@ if ((SELECT dtAquisicao FROM DBO.Ativos WHERE id = @id) < @dtInicio)
 		BEGIN TRANSACTION
 		INSERT INTO dbo.Intervencao VALUES(@id,@descricao,'por atribuir',@dtInicio,@dtFim,@valor,@ativoId)
 		INSERT INTO dbo.EquipaIntervencao VALUES (@id,null)
+		if (@meses > 0)
+			INSERT INTO dbo.IntervencaoPeriodica values (@id, @meses)
 		COMMIT
 	END
 ELSE
 	BEGIN
-		RAISERROR('Data da Intervencao maior que a data de aquisicao, linha não foi inserida',15,1)
+		RAISERROR('Data da Intervencao maior que a data de aquisicao, linha não foi inserida',16,1)
 	END
 
 GO

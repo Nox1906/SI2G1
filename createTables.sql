@@ -61,7 +61,7 @@ CREATE TABLE dbo.Ativos (
 
 CREATE TABLE dbo.Historico (
 	idAtivo int not null,
-	dtAlteracao date not null,
+	dtAlteracao datetime not null,
 	valor money,
 	PRIMARY KEY (idAtivo,dtAlteracao),
 	FOREIGN KEY (idAtivo) REFERENCES Ativos(id),
@@ -77,7 +77,7 @@ CREATE TABLE dbo.Equipa(
 CREATE TABLE dbo.EquipaFunc (
 	funcId int not null,
 	equipaId int not null, 
-	supervisor int not null,
+	supervisor int,
 	PRIMARY KEY (funcId),
 	FOREIGN KEY (funcId) REFERENCES Funcionarios(id),
 	FOREIGN KEY (equipaId) REFERENCES Equipa(id),
