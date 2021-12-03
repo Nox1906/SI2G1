@@ -76,7 +76,7 @@ CREATE TABLE dbo.Equipa(
 
 CREATE TABLE dbo.EquipaFunc (
 	funcId int not null,
-	equipaId int not null, 
+	equipaId int, 
 	supervisor int,
 	PRIMARY KEY (funcId),
 	FOREIGN KEY (funcId) REFERENCES Funcionarios(id),

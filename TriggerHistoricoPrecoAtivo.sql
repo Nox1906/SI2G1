@@ -1,4 +1,12 @@
 USE L51NG1
+
+GO
+/****** Object:  Trigger [dbo].[trg_UpdateEquipaIntervencao]    Script Date: 29/11/2021 12:10:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE OR ALTER TRIGGER [dbo].[trg_HistoricoValorAtivo]
 ON [dbo].[Ativos]
 AFTER INSERT, UPDATE
