@@ -117,9 +117,9 @@ CREATE TABLE dbo.EquipaIntervencao (
 CREATE TABLE dbo.HistAlteracaoEqInterv (
 	idIntervencao int not null,
 	equipaId int, 
-	dtAtualizaco DATETIME, 
-	PRIMARY KEY (idIntervencao,dtAtualizaco),
-	FOREIGN KEY (idIntervencao) REFERENCES Intervencao(id),
+	dtAtualizacao DATETIME, 
+	PRIMARY KEY (idIntervencao,dtAtualizacao),
+	FOREIGN KEY (idIntervencao) REFERENCES EquipaIntervencao(id),
 );
 
 COMMIT TRANSACTION
