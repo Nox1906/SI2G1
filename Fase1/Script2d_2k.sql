@@ -64,7 +64,7 @@ BEGIN
 		SELECT TOP 1 e.equipaId AS EQ, COUNT(e.idIntervencao) as nIntervencoes, maxData	
 		FROM EquipaIntervencao E
 			INNER JOIN Intervencao I ON I.id = E.idIntervencao
-			inner join (SELECT equipaId as eq, max(dtAtualizaco) as maxData 
+			inner join (SELECT equipaId as eq, max(dtAtualizacao) as maxData 
 						FROM HistAlteracaoEqInterv 
 						group by equipaId) h on h.eq = E.equipaId
 		where e.equipaId is not NULL AND I.estado != 'em execução' 
