@@ -14,3 +14,23 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.cs
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.csproj.CopyComplete
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.exe
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.csproj.AssemblyReference.cache
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.csproj.CoreCompileInputs.cache
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.exe
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Fase2_Project.exe
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Fase2_Project.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\BusinessLayer.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\DataLayer.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Model.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\BusinessLayer.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\DataLayer.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.dll.config
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Model.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.xml
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.csproj.CopyComplete
