@@ -50,6 +50,81 @@ namespace fase2
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<IntervencaoAno_Result>("[L51NG1Entities].[IntervencaoAno](@year)", yearParameter);
         }
     
+        public virtual int ActualizarElementosEquipa(Nullable<int> equipaId, Nullable<int> funcId, string operationType)
+        {
+            var equipaIdParameter = equipaId.HasValue ?
+                new ObjectParameter("equipaId", equipaId) :
+                new ObjectParameter("equipaId", typeof(int));
+    
+            var funcIdParameter = funcId.HasValue ?
+                new ObjectParameter("FuncId", funcId) :
+                new ObjectParameter("FuncId", typeof(int));
+    
+            var operationTypeParameter = operationType != null ?
+                new ObjectParameter("operationType", operationType) :
+                new ObjectParameter("operationType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarElementosEquipa", equipaIdParameter, funcIdParameter, operationTypeParameter);
+        }
+    
+        public virtual int CriaEquipa(Nullable<int> idEquipa, string localizacao)
+        {
+            var idEquipaParameter = idEquipa.HasValue ?
+                new ObjectParameter("idEquipa", idEquipa) :
+                new ObjectParameter("idEquipa", typeof(int));
+    
+            var localizacaoParameter = localizacao != null ?
+                new ObjectParameter("localizacao", localizacao) :
+                new ObjectParameter("localizacao", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CriaEquipa", idEquipaParameter, localizacaoParameter);
+        }
+    
+        public virtual int Funcionarioinsertupdatedelete(Nullable<int> id, string nome, Nullable<int> cc, Nullable<int> nif, Nullable<System.DateTime> dtNasc, string endereco, string email, string ntelefone, string profissao, string operationType)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            var ccParameter = cc.HasValue ?
+                new ObjectParameter("cc", cc) :
+                new ObjectParameter("cc", typeof(int));
+    
+            var nifParameter = nif.HasValue ?
+                new ObjectParameter("nif", nif) :
+                new ObjectParameter("nif", typeof(int));
+    
+            var dtNascParameter = dtNasc.HasValue ?
+                new ObjectParameter("dtNasc", dtNasc) :
+                new ObjectParameter("dtNasc", typeof(System.DateTime));
+    
+            var enderecoParameter = endereco != null ?
+                new ObjectParameter("endereco", endereco) :
+                new ObjectParameter("endereco", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var ntelefoneParameter = ntelefone != null ?
+                new ObjectParameter("ntelefone", ntelefone) :
+                new ObjectParameter("ntelefone", typeof(string));
+    
+            var profissaoParameter = profissao != null ?
+                new ObjectParameter("profissao", profissao) :
+                new ObjectParameter("profissao", typeof(string));
+    
+            var operationTypeParameter = operationType != null ?
+                new ObjectParameter("operationType", operationType) :
+                new ObjectParameter("operationType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Funcionarioinsertupdatedelete", idParameter, nomeParameter, ccParameter, nifParameter, dtNascParameter, enderecoParameter, emailParameter, ntelefoneParameter, profissaoParameter, operationTypeParameter);
+        }
+    
         public virtual int SP_ActualizarElementosEquipa(Nullable<int> equipaId, Nullable<int> funcId, string operationType, Nullable<int> supervisor)
         {
             var equipaIdParameter = equipaId.HasValue ?

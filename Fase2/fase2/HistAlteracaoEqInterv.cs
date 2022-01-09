@@ -16,8 +16,8 @@ namespace fase2
     {
         public int idIntervencao { get; set; }
         public Nullable<int> equipaId { get; set; }
-        public System.DateTime dtAtualizaco { get; set; }
+        public System.DateTime dtAtualizacao { get; set; }
     
-        public virtual Intervencao Intervencao { get; set; }
+        public virtual EquipaIntervencao EquipaIntervencao { get; set; }
     }
 }

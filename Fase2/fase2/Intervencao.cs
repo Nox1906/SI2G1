@@ -14,12 +14,6 @@ namespace fase2
     
     public partial class Intervencao
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Intervencao()
-        {
-            this.HistAlteracaoEqIntervs = new HashSet<HistAlteracaoEqInterv>();
-        }
-    
         public int id { get; set; }
         public string descricao { get; set; }
         public string estado { get; set; }
@@ -30,8 +24,6 @@ namespace fase2
     
         public virtual Ativo Ativo { get; set; }
         public virtual EquipaIntervencao EquipaIntervencao { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistAlteracaoEqInterv> HistAlteracaoEqIntervs { get; set; }
         public virtual IntervencaoPeriodica IntervencaoPeriodica { get; set; }
     }
 }
