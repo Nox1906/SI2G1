@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5750c72f164b484d950dc911cdb01f04" Name="Diagram1">
+        <EntityTypeShape EntityType="L51NG1Model.Ativo" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Competencia" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Equipa" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.EquipaFunc" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.EquipaIntervencao" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Funcionario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.HistAlteracaoEqInterv" Width="1.5" PointX="12" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Historico" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Intervencao" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.IntervencaoPeriodica" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.Tipos" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="L51NG1Model.TV_ResumoIntervencoes" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="L51NG1Model.FK__Ativos__gestorId__4BA21D88" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__Ativos__parentId__49B9D516" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__Ativos__tipoId__4AADF94F" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__Historico__idAti__4E7E8A33" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__Intervenc__ativo__59F03CDF" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__EquipaFun__equip__54376389" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__EquipaInt__equip__61915EA7" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__EquipaFun__funcI__53433F50" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__EquipaFun__super__552B87C2" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__EquipaInt__idInt__609D3A6E" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__HistAlter__idInt__646DCB52" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FK__IntervencaoP__id__5DC0CDC3" ManuallyRouted="false" />
+        <AssociationConnector Association="L51NG1Model.FunCompet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

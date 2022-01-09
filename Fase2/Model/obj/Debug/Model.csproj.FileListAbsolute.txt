@@ -1,0 +1,6 @@
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\bin\Debug\Model.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\bin\Debug\Model.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\obj\Debug\Model.csprojAssemblyReference.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\obj\Debug\Model.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Model\obj\Debug\Model.pdb
