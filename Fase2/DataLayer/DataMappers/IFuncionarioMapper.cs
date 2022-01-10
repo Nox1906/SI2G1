@@ -1,9 +1,9 @@
-﻿using DataLayer.DataMappers;
+﻿
 using Model;
 
-namespace DataLayer
+namespace DataLayer.DataMappers
 {
-    interface IFuncionarioMapper : IMapper<Funcionario, int>
+    public interface IFuncionarioMapper : IMapper<Funcionario, int>
     {
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
+using BusinessLayer;
 using DataLayer.QueryObjects;
 using EntityFrameworkServices;
+
 
 namespace Fase2_Project
 {
@@ -9,23 +11,34 @@ namespace Fase2_Project
     {
         static void Main(string[] args)
         {
-            using (Session session = new Session())
+            while (true)
             {
-                FuncionarioMapper pmapper = new FuncionarioMapper(session);
-                Model.Funcionario f = pmapper.ReadById(1);
-                session.closeCon(false);
-            }
-           
-            var efm = new EntityFrameworkManager();
-            Funcionario func = efm.getFuncionario(1);
-            Console.WriteLine(func.nome);
+                showOptions();
+                string userInput = Console.ReadLine();
+                if (userInput == "10")
+                    break;
+                getAndExecOption(userInput);
+            }       
+        }
 
+        private static void showOptions()
+        {
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1 -> Get free team");
+            Console.WriteLine("10 -> Exit");
+        }
+  
+        private static void getAndExecOption(string userInput)
+        {
+            int option = int.Parse(userInput.Substring(0, 1));
 
-            var intervencoes = efm.getIntervencaoAno(2021);
-            foreach(var i in intervencoes)
+            switch (option)
             {
-                Console.WriteLine(i.id);
-                Console.WriteLine(i.descricao);
+                case 1:
+                    EquipaServices _equipaService = new EquipaServices();
+                    _equipaService.showEquipaLivre();
+                    break;
+
             }
         }
     }

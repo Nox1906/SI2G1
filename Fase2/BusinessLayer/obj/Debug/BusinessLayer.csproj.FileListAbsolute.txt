@@ -9,3 +9,19 @@ C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csproj.C
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\DataLayer.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\Model.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\DataLayer.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\Model.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csprojAssemblyReference.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.dll.config
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.xml

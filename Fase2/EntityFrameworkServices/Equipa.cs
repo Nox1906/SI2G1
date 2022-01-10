@@ -20,7 +20,7 @@ namespace EntityFrameworkServices
             this.EquipaFuncs = new HashSet<EquipaFunc>();
             this.EquipaIntervencaos = new HashSet<EquipaIntervencao>();
         }
-    
+        
         public int id { get; set; }
         public string localizacao { get; set; }
         public Nullable<int> nFunc { get; set; }

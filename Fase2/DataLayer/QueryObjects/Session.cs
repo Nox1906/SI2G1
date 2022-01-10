@@ -25,9 +25,9 @@ namespace DataLayer.QueryObjects
             return false;
         }
 
-        public void closeCon(bool IsMyCon)
+        public void closeCon()
         {
-            if (IsMyCon && con != null)
+            if (con != null)
             {
                 con.Close();
                 con = null;

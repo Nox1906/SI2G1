@@ -12,7 +12,7 @@ namespace DataLayer.DataMappers
         bool beginTran();
         bool openCon();
         void endTran(bool myVote,bool IsMyTran);
-        void closeCon(bool IsMyTran);
+        void closeCon();
         SqlConnection getCurrCon();
         SqlTransaction getCurrTran();
         SqlCommand CreateCommand();

@@ -10,3 +10,15 @@ C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFramew
 C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.csproj.CopyComplete
 C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFrameworkServices.dll.config
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFrameworkServices.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFrameworkServices.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFramework.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFramework.SqlServer.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFramework.xml
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\bin\Debug\EntityFramework.SqlServer.xml
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.csprojAssemblyReference.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.csproj.CoreCompileInputs.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.csproj.CopyComplete
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkServices\obj\Debug\EntityFrameworkServices.pdb
