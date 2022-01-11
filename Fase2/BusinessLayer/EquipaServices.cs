@@ -1,7 +1,4 @@
-﻿#define ADONET
-//#define EF
-
-using DataLayer;
+﻿using DataLayer;
 using DataLayer.DataMappers;
 using DataLayer.QueryObjects;
 using System;
@@ -10,9 +7,8 @@ using System.Reflection;
 namespace BusinessLayer
 {
 
-    public class EquipaServices
+    public class EquipaServices 
     {
-#if ADONET
 
         Session session;
         IEquipaMapper equipaMapper;
@@ -23,7 +19,26 @@ namespace BusinessLayer
             equipaMapper = new EquipaMapper(session);
         }
 
-        public void showResults(Object obj)
+        public void showEquipaLivre()
+        {
+            Console.WriteLine("Inserir competencia : ");
+            string competencia = Console.ReadLine();
+            try
+            {
+                Object resultado = equipaMapper.GetEquipaLivre(competencia);
+                showResults(resultado);
+                this.session.closeCon();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        public void showEquipaLivreEF()
+        {
+            throw new NotImplementedException();
+        }
+        private void showResults(Object obj)
         {
             Type t = obj.GetType();
             Console.WriteLine("Type is: {0}", t.Name);
@@ -34,18 +49,5 @@ namespace BusinessLayer
                   prop.GetValue(obj));
             }
         }
-
-        public void showEquipaLivre()
-        {
-            Console.WriteLine("Inserir competencia : \n");
-            string competencia = Console.ReadLine();
-            Object resultado = ((EquipaMapper)equipaMapper).GetEquipaLivre(competencia);
-            showResults(resultado);
-            this.session.closeCon();
-        }
-
-#endif
-#if EF
-#endif
     }
 }

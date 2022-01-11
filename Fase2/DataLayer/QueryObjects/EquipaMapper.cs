@@ -77,7 +77,7 @@ namespace DataLayer.QueryObjects
             throw new NotImplementedException();
         }
 
-        public Equipa GetEquipaLivre(String competencia)
+        public Equipa GetEquipaLivre(string competencia)
         {
             int equipaId = 0;
             using (SqlCommand cmd = session.CreateCommand())

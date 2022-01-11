@@ -108,7 +108,6 @@ if ((SELECT dtAquisicao FROM DBO.Ativos WHERE ativos.id = @ativoId) < @dtInicio)
 	begin
 
 		INSERT INTO dbo.Intervencao VALUES(@id,@descricao,'por atribuir',@dtInicio,@dtFim,@valor,@ativoId)
-		INSERT INTO dbo.EquipaIntervencao VALUES (@id,null)
 		if (@meses > 0)
 			INSERT INTO dbo.IntervencaoPeriodica values (@id, @meses)
 		COMMIT

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿//#define EF
+#define ADONET
+
+using System;
 using BusinessLayer;
-using DataLayer.QueryObjects;
-using EntityFrameworkServices;
 
 
 namespace Fase2_Project
@@ -17,18 +17,19 @@ namespace Fase2_Project
                 string userInput = Console.ReadLine();
                 if (userInput == "10")
                     break;
-                getAndExecOption(userInput);
-            }       
+                execOption(userInput);
+            }
         }
 
         private static void showOptions()
         {
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1 -> Get free team");
-            Console.WriteLine("10 -> Exit");
+            Console.WriteLine("Escolha uma opção");
+            Console.WriteLine("1 -> Obter equipa livre para uma intervenção");
+            Console.WriteLine("2 -> Inserir Intervencão");
+            Console.WriteLine("10 -> Sair");
         }
-  
-        private static void getAndExecOption(string userInput)
+#if ADONET
+        private static void execOption(string userInput)
         {
             int option = int.Parse(userInput.Substring(0, 1));
 
@@ -38,8 +39,27 @@ namespace Fase2_Project
                     EquipaServices _equipaService = new EquipaServices();
                     _equipaService.showEquipaLivre();
                     break;
+                case 2:
+                    IntervencaoServices _intervencaoService = new IntervencaoServices();
+                    _intervencaoService.insertIntervencaoWithProcedure();
+                    break;
+            }
+        }
+#endif
+#if EF
+        private static void execOption(string userInput)
+        {
+            int option = int.Parse(userInput.Substring(0, 1));
+
+            switch (option)
+            {
+                case 1:
+                    EquipaServices _equipaService = new EquipaServices();
+                    _equipaService.showEquipaLivreEF();
+                    break;
 
             }
         }
+#endif
     }
 }
