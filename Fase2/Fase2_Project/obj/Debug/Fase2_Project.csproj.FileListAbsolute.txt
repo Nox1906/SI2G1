@@ -23,12 +23,9 @@ C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\BusinessLayer.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\DataLayer.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Model.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\BusinessLayer.pdb
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\DataLayer.pdb
-C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.pdb
-C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.dll.config
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Model.pdb
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.xml
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFramework.SqlServer.xml
@@ -39,3 +36,7 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\BusinessLayer.pd
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.pdb
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkServices.dll.config
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\Fase2_Project.exe.config
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\Fase2_Project.exe.config
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkModel.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkModel.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkModel.dll.config

@@ -31,8 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdoNetServices.cs" />
+    <Compile Include="DbServices.cs" />
+    <Compile Include="EntityFrameworkServices.cs" />
     <Compile Include="EquipaServices.cs" />
+    <Compile Include="FrameworkEnum.cs" />
+    <Compile Include="IServices.cs" />
     <Compile Include="IntervencaoServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,9 +57,9 @@
       <Project>{3b2e44b6-b54b-41c3-a880-5228f51e11ce}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EntityFrameworkServices\EntityFrameworkServices.csproj">
-      <Project>{15651946-0d83-40bc-b640-696803574f60}</Project>
-      <Name>EntityFrameworkServices</Name>
+    <ProjectReference Include="..\EntityFrameworkModel\EntityFrameworkModel.csproj">
+      <Project>{bfb71c32-bdfd-4f0a-81f3-ad0b81dfb3f2}</Project>
+      <Name>EntityFrameworkModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{764f9bcb-6923-4d5f-b6f3-0fe09d311da3}</Project>

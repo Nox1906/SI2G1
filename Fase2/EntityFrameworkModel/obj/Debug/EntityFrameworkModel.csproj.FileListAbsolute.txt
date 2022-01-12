@@ -1,0 +1,14 @@
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFrameworkModel.dll.config
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFrameworkModel.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFrameworkModel.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFramework.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFramework.xml
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.csproj.AssemblyReference.cache
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.csproj.CoreCompileInputs.cache
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.csproj.CopyComplete
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\Model.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\Model.pdb

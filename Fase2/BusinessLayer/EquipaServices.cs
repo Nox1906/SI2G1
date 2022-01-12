@@ -10,9 +10,8 @@ namespace BusinessLayer
     public class EquipaServices 
     {
 
-        Session session;
         IEquipaMapper equipaMapper;
-
+        Session session;
         public EquipaServices()
         {
             this.session = new Session();
@@ -27,17 +26,14 @@ namespace BusinessLayer
             {
                 Object resultado = equipaMapper.GetEquipaLivre(competencia);
                 showResults(resultado);
-                this.session.closeCon();
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        public void showEquipaLivreEF()
-        {
-            throw new NotImplementedException();
-        }
+      
         private void showResults(Object obj)
         {
             Type t = obj.GetType();

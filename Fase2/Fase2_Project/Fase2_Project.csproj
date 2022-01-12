@@ -67,10 +67,6 @@
       <Project>{3b2e44b6-b54b-41c3-a880-5228f51e11ce}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EntityFrameworkServices\EntityFrameworkServices.csproj">
-      <Project>{15651946-0d83-40bc-b640-696803574f60}</Project>
-      <Name>EntityFrameworkServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{764f9bcb-6923-4d5f-b6f3-0fe09d311da3}</Project>
       <Name>Model</Name>
