@@ -43,15 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataMappers\IFuncionarioMapper.cs" />
-    <Compile Include="DataMappers\IIntervencaoMapper.cs" />
     <Compile Include="DataMappers\IMapper.cs" />
-    <Compile Include="DataMappers\IEquipaMapper.cs" />
     <Compile Include="DataMappers\ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryObjects\EquipaMapper.cs" />
-    <Compile Include="QueryObjects\FuncionarioMapper.cs" />
-    <Compile Include="QueryObjects\IntervencaoMapper.cs" />
+    <Compile Include="QueryObjects\EquipaFuncMapper.cs" />
+    <Compile Include="QueryObjects\Mapper.cs" />
+    <Compile Include="QueryObjects\TeamMapper.cs" />
+    <Compile Include="QueryObjects\InterventionMapper.cs" />
     <Compile Include="QueryObjects\Session.cs" />
   </ItemGroup>
   <ItemGroup>

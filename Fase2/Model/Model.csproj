@@ -42,8 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Equipa.cs" />
-    <Compile Include="Funcionario.cs" />
+    <Compile Include="EquipaFunc.cs" />
     <Compile Include="Intervencao.cs" />
+    <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

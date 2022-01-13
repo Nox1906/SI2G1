@@ -1,7 +1,4 @@
-﻿//#define EF
-#define ADONET
-
-using System;
+﻿using System;
 using BusinessLayer;
 
 
@@ -9,72 +6,88 @@ namespace Fase2_Project
 {
     class Program
     {
-        static DbServices dbServices = null;
         static void Main(string[] args)
         {
-            
-            while (true)
+            bool exit = false;
+            while (!exit)
             {
-
-                chooseFramework();
-                string userInput = Console.ReadLine();
-                if (userInput == "10")
-                    break;
-                if (userInput == "1" || userInput == "2")
-                {
-                    dbServices = new DbServices(Int32.Parse(userInput));
-                    break;
+                showConOptions();
+                int userInput;
+                while (!Int32.TryParse(Console.ReadLine(), out userInput))
+                    Console.WriteLine("Valor tem de ser inteiro\n");
+                IServices services;
+                switch (userInput) {
+                    case 1:
+                        services = new ADONetServices();
+                        secondMenu(services);
+                        break;
+                    case 2:
+                        break;
+                    case 0:
+                        exit = true;
+                        break;
                 }
             }
-
-            if (dbServices != null)
-            {
-                menu();
-            }
-            Console.WriteLine("END");
-
         }
-        public static void menu()
+
+        private static void secondMenu(IServices services)
         {
             while (true)
             {
                 showOptions();
-                string userInput = Console.ReadLine();
-                if (userInput == "10")
-                    break;
-                execOption(userInput);
+                int userInput;
+                while (!Int32.TryParse(Console.ReadLine(), out userInput))
+                    Console.WriteLine("Valor tem de ser inteiro\n");
+                if (userInput == 0) return;
+                execOption(services, userInput);
             }
         }
-        private static void chooseFramework()
+
+        private static void showConOptions()
         {
-            Console.WriteLine("Escolha a framework a usar:");
-            Console.WriteLine("1 -> ADO.NET");
-            Console.WriteLine("2 -> Entity FrameWork");
-            Console.WriteLine("10 -> Sair");
+            Console.WriteLine("Escolha uma opção");
+            Console.WriteLine("1 -> Usar ADONET");
+            Console.WriteLine("2 -> Usar Entity Framework");
+            Console.WriteLine("0 -> Sair");
         }
 
         private static void showOptions()
         {
             Console.WriteLine("Escolha uma opção");
             Console.WriteLine("1 -> Obter equipa livre para uma intervenção");
-            Console.WriteLine("2 -> Inserir Intervencão");
-            Console.WriteLine("3 -> Obter intervençoes num determinado ano");
-            Console.WriteLine("10 -> Sair");
+            Console.WriteLine("2 -> Inserir Intervencão com procedure");
+            Console.WriteLine("3 -> Inserir Equipa");
+            Console.WriteLine("4 -> Inserir Elementos a uma Equipa");
+            Console.WriteLine("5 -> Intervenções num ano");
+            Console.WriteLine("6 -> Inserir Intervencão");
+            Console.WriteLine("7 -> Atribuir intervenção a uma equipa livre");
+            Console.WriteLine("0 -> Sair para o menu anterior");
         }
-        private static void execOption(string userInput)
-        {
-            int option = int.Parse(userInput.Substring(0, 1));
 
-            switch (option)
+        private static void execOption(IServices services,  int userInput)
+        {
+            switch (userInput)
             {
                 case 1:
-                    dbServices.showEquipalivre();
+                    services.showFreeTeam();
                     break;
                 case 2:
-                    dbServices.insertIntervencaoWithProcedure();
+                    services.insertInterventionWithProcedure();
                     break;
                 case 3:
-                    dbServices.showIntervencaoAno();
+                    services.insertTeam();
+                    break;
+                case 4:
+                    services.insertOrDeleteEquipaFunc();
+                    break;
+                case 5:
+                    services.showIntervencionsByYear();
+                    break;
+                case 6:
+                    services.insertIntervention();
+                    break;
+                case 7:
+                    services.putTeamInIntervencion();
                     break;
             }
         }

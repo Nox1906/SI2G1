@@ -25,7 +25,3 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.pdb
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.dll.config
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.xml
-C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll
-C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.pdb
-C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll.config
-C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.xml

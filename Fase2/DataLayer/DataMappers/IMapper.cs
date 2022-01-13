@@ -7,5 +7,6 @@ namespace DataLayer.DataMappers
         T ReadById(Tid id);
         void Update(T entity);
         void Delete(T entity);
+        void CreateWithSP(T entity);
     }
 }
