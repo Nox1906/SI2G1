@@ -14,14 +14,33 @@ namespace BusinessLayer
 
         public ADONetServices()
         {
-            this.session = new Session();
+            
+        }
+        public Equipa getEquipaLivre(string competencia)
+        {
+            session = new Session();
+            IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
+            Equipa resultado = null;
+            try
+            {
+                resultado = ((EquipaMapper)equipaMapper).getFreeTeam(competencia);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                session.closeCon();
+            }
+            return resultado;
         }
 
-        public void insertInterventionWithProcedure()
+
+        public void insertIntervencaoWithProcedure(Intervencao intervencao)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new InterventionMapper(session);
-            Intervencao intervencao = new Intervencao();
-            intervencao.insertValues();
+            session = new Session();
+            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             try
             {
                 intervencaoMapper.CreateWithSP(intervencao);
@@ -33,38 +52,17 @@ namespace BusinessLayer
             }
             finally
             {
-                this.session.closeCon();
+                session.closeCon();
             }
         }
-
-        public void showFreeTeam()
+        public void insertEquipa(Equipa equipa)
         {
-            IMapper<Equipa, int> equipaMapper = new TeamMapper(session);
-            Console.WriteLine("Inserir competencia : ");
-            string competencia = Console.ReadLine();
-            try
-            {
-                Equipa resultado  = ((TeamMapper)equipaMapper).GetEquipaLivre(competencia);
-                Console.WriteLine(resultado.ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                this.session.closeCon();
-            }
-        }
-        public void insertTeam()
-        {
-            IMapper<Equipa, int> equipaMapper = new TeamMapper(session);
-            Equipa equipa = new Equipa();
-            equipa.insertValues();
+            session = new Session();
+            IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
             try
             {
                 equipaMapper.CreateWithSP(equipa);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
+                Console.WriteLine("Equipa inserida com sucesso \n");
             }
             catch (Exception e)
             {
@@ -72,31 +70,18 @@ namespace BusinessLayer
             }
             finally
             {
-                this.session.closeCon();
+                session.closeCon();
             }
         }
-        public void insertOrDeleteEquipaFunc()
+
+        public void insertOrDeleteEquipaFunc(EquipaFunc equipaFunc, string option)
         {
+            session = new Session();
             IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
-            EquipaFunc equipaFunc = new EquipaFunc();
-            Console.WriteLine("Escolher opção: insert ; delete");
-            string option;
-            while (true)
-            {
-                string[] values = { "insert", "delete" };
-                option = Console.ReadLine();
-                if (values.Any(option.Contains))
-                {
-                    break;
-                }
-                else
-                    Console.WriteLine("descricao nao é valida");
-            }
-            equipaFunc.insertValues();
             try
             {
                 ((EquipaFuncMapper)equipaFuncMapper).insertOrDeleteEquipaFunc(equipaFunc, option);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
+                Console.WriteLine("Operação inserida com sucesso \n");
             }
             catch (Exception e)
             {
@@ -104,26 +89,18 @@ namespace BusinessLayer
             }
             finally
             {
-                this.session.closeCon();
+                session.closeCon();
             }
         }
 
-        public void showIntervencionsByYear()
+        public List<Intervencao> getIntervencoesAno(int ano)
         {
-            Console.WriteLine("Inserir ano");
-            int ano;
-            while (!Int32.TryParse(Console.ReadLine(), out ano))
-                Console.WriteLine("Valor tem de ser inteiro entre 1990 e 2100\n");
-            IMapper<Intervencao, int> intervencaoMapper = new InterventionMapper(session);
+            session = new Session();
+            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+            List<Intervencao> intervencoes = null;
             try
             {
-                List<Intervencao> intervencions = ((InterventionMapper)intervencaoMapper).GetInterventionsByYear(ano);
-                foreach (Intervencao i in intervencions)
-                {
-                    Intervencao newI = intervencaoMapper.ReadById(i.id);
-                    Console.WriteLine($"id: {newI.id} ; descrição: {newI.descricao}");
-                }
-                intervencions.Clear();
+                intervencoes = ((IntervencaoMapper)intervencaoMapper).getIntervencoesAno(ano);
             }
             catch (Exception e)
             {
@@ -131,16 +108,15 @@ namespace BusinessLayer
             }
             finally
             {
-                this.session.closeCon();
+                session.closeCon();
             }
+            return intervencoes;
         }
 
-        public void insertIntervention()
+        public void insertIntervencao(Intervencao intervencao)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new InterventionMapper(session);
-            Intervencao intervencao = new Intervencao();
-            intervencao.insertValues();
-            intervencao.insertDiferentState();
+            session = new Session();
+            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             try
             {
                 intervencaoMapper.Create(intervencao);
@@ -155,20 +131,14 @@ namespace BusinessLayer
                 this.session.closeCon();
             }
         }
-
-        public void putTeamInIntervencion()
+        public void insertEquipaIntervencao(Intervencao intervencao)
         {
-            Intervencao intervencao = new Intervencao();
-            IMapper<Intervencao, int> intervencaoMapper = new InterventionMapper(session);
-            IMapper<Equipa, int> equipaMapper = new TeamMapper(session);
-            intervencao.insertValues();
+            session = new Session();
+            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             try
             {
-                Equipa e = ((TeamMapper)equipaMapper).GetEquipaLivre(intervencao.descricao);
-                Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
-                intervencaoMapper.CreateWithSP(intervencao);
-                intervencao.insertDiferentState();
-                ((InterventionMapper)intervencaoMapper).UpdateState(intervencao);
+                
+                ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
             }
             catch (Exception e)
             {

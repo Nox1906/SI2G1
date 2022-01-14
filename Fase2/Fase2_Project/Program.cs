@@ -15,13 +15,15 @@ namespace Fase2_Project
                 int userInput;
                 while (!Int32.TryParse(Console.ReadLine(), out userInput))
                     Console.WriteLine("Valor tem de ser inteiro\n");
-                IServices services;
+                DbServices services;
                 switch (userInput) {
                     case 1:
-                        services = new ADONetServices();
+                        services = new DbServices(true);
                         secondMenu(services);
                         break;
                     case 2:
+                        services = new DbServices(false);
+                        secondMenu(services);
                         break;
                     case 0:
                         exit = true;
@@ -30,7 +32,7 @@ namespace Fase2_Project
             }
         }
 
-        private static void secondMenu(IServices services)
+        private static void secondMenu(DbServices services)
         {
             while (true)
             {
@@ -57,37 +59,37 @@ namespace Fase2_Project
             Console.WriteLine("1 -> Obter equipa livre para uma intervenção");
             Console.WriteLine("2 -> Inserir Intervencão com procedure");
             Console.WriteLine("3 -> Inserir Equipa");
-            Console.WriteLine("4 -> Inserir Elementos a uma Equipa");
+            Console.WriteLine("4 -> Atualizar Elementos a uma Equipa");
             Console.WriteLine("5 -> Intervenções num ano");
             Console.WriteLine("6 -> Inserir Intervencão");
             Console.WriteLine("7 -> Atribuir intervenção a uma equipa livre");
             Console.WriteLine("0 -> Sair para o menu anterior");
         }
 
-        private static void execOption(IServices services,  int userInput)
+        private static void execOption(DbServices services,  int userInput)
         {
             switch (userInput)
             {
                 case 1:
-                    services.showFreeTeam();
+                    services.getEquipaLivre();
                     break;
                 case 2:
-                    services.insertInterventionWithProcedure();
+                    services.insertIntervencaoWithProcedure();
                     break;
                 case 3:
-                    services.insertTeam();
+                    services.insertEquipa();
                     break;
                 case 4:
                     services.insertOrDeleteEquipaFunc();
                     break;
                 case 5:
-                    services.showIntervencionsByYear();
+                    services.getIntervencoesAno();
                     break;
                 case 6:
-                    services.insertIntervention();
+                    services.insertIntervencao();
                     break;
                 case 7:
-                    services.putTeamInIntervencion();
+                    services.insertEquipaIntervencao();
                     break;
             }
         }

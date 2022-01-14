@@ -9,12 +9,16 @@ namespace BusinessLayer
 {
     public interface IServices
     {
-        void insertInterventionWithProcedure();
-        void showFreeTeam();
-        void insertTeam();
-        void insertOrDeleteEquipaFunc();
-        void showIntervencionsByYear();
-        void insertIntervention();
-        void putTeamInIntervencion();
+        Equipa getEquipaLivre(string competencia);
+        void insertIntervencaoWithProcedure(Intervencao intervencao);
+        void insertEquipa(Equipa equipa);
+        void insertOrDeleteEquipaFunc(EquipaFunc equipaFunc, string option);
+        List<Intervencao> getIntervencoesAno(int ano);
+        void insertIntervencao(Intervencao intervencao);
+
+
+
+
+        void insertEquipaIntervencao(Intervencao intervencao);
     }
 }
