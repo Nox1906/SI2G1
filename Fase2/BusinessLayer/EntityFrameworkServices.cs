@@ -12,11 +12,12 @@ namespace BusinessLayer
         EntityFrameworkManager efm;
         public EntityFrameworkServices()
         {
-            this.efm = new EntityFrameworkManager();
+            
         }
 
         public Model.Equipa getEquipaLivre(string competencia)
         {
+            this.efm = new EntityFrameworkManager();
             Model.Equipa resultado = null;
             try
             {
@@ -31,6 +32,7 @@ namespace BusinessLayer
 
         public void insertIntervencaoWithProcedure(Model.Intervencao i)
         {
+            this.efm = new EntityFrameworkManager();
             try
             {
                 efm.insertIntervencaoWithProcedure(i);
@@ -46,7 +48,7 @@ namespace BusinessLayer
 
         public void insertEquipa(Model.Equipa equipa)
         {
-
+            this.efm = new EntityFrameworkManager();
             try
             {
                 efm.insertEquipa(equipa);
@@ -74,6 +76,7 @@ namespace BusinessLayer
 
         public List<Model.Intervencao> getIntervencoesAno(int ano)
         {
+            this.efm = new EntityFrameworkManager();
             List<Model.Intervencao> intervencoes = new List<Model.Intervencao>();
             try
             {
@@ -108,9 +111,10 @@ namespace BusinessLayer
 
         public void insertIntervencao(Model.Intervencao intervencao)
         {
+            this.efm = new EntityFrameworkManager();
             try
             {
-                efm.Create(intervencao);
+                efm.insertIntervencao(intervencao);
                 Console.WriteLine("Intervenção inserida com sucesso \n");
             }
             catch (Exception e)
@@ -121,7 +125,31 @@ namespace BusinessLayer
 
         public void insertEquipaIntervencao(Model.Intervencao intervencao, Model.Equipa equipa)
         {
-            throw new NotImplementedException();
+            this.efm = new EntityFrameworkManager();
+            try
+            {
+                efm.insertEquipaIntervencao(intervencao,equipa);
+                Console.WriteLine("Equipa com id = "+ equipa.Id+" atribuida à intervenção com id = "+intervencao.id+"\n");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        public void changeCompetenciaFunc(int id, int newCompt, int oldCompt)
+        {
+            this.efm = new EntityFrameworkManager();
+            try
+            {
+                efm.changeCompetenciaFunc(id, newCompt, oldCompt);
+                Console.WriteLine("Competencia com id = " + oldCompt + " substituida pela com id  = " + newCompt + " no funcionario " +id+"\n");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }

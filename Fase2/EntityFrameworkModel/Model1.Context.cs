@@ -24,6 +24,15 @@ namespace EntityFrameworkModel
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Funcionario>()
+            //    .HasMany<Competencia>(s => s.Competencias)
+            //    .WithMany(c => c.Funcionarios)
+            //    .Map(cs =>
+            //    {
+            //        cs.MapLeftKey("idFunc");
+            //        cs.MapRightKey("idComp");
+            //        cs.ToTable("FunCompet");
+            //    });
             throw new UnintentionalCodeFirstException();
         }
     

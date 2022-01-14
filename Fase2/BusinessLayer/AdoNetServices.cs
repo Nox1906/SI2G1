@@ -134,6 +134,7 @@ namespace BusinessLayer
             {
                 equipaIntervencaoMapper.Update(equipaIntervecao);
                 ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
+                Console.WriteLine("Equipa com id = " + equipa.Id + " atribuida à intervenção com id = " + intervencao.id + "\n");
             }
             catch (Exception e)
             {
@@ -143,6 +144,11 @@ namespace BusinessLayer
             {
                 this.session.closeCon();
             }
+        }
+
+        public void changeCompetenciaFunc(int id,int newCompt, int oldCompt)
+        {
+            throw new NotImplementedException();
         }
     }
 }

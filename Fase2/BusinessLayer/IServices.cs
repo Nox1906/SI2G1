@@ -16,5 +16,6 @@ namespace BusinessLayer
         List<Intervencao> getIntervencoesAno(int ano);
         void insertIntervencao(Intervencao intervencao);
         void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa);
+        void changeCompetenciaFunc(int id, int newCompt, int oldCompt);
     }
 }

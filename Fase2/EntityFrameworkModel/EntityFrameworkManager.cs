@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,7 +88,7 @@ namespace EntityFrameworkModel
             }
         }
 
-        public void Create(Model.Intervencao i)
+        public void insertIntervencao(Model.Intervencao i)
         {
             using (ts)
             {
@@ -111,9 +112,58 @@ namespace EntityFrameworkModel
                         {
                             id = i.id,
                             meses = i.meses
-                        });;
+                        }); ;
                     }
                     ctx.SaveChanges();
+                }
+                ts.Complete();
+            }
+        }
+        public void insertEquipaIntervencao(Model.Intervencao intervencao, Model.Equipa equipa)
+        {
+            using (ts)
+            {
+                using (ctx = new L51NG1Entities())
+                {
+                    var e = (from i in ctx.EquipaIntervencaos where i.idIntervencao == intervencao.id select i).SingleOrDefault();
+                    e.equipaId = equipa.Id;
+
+                    ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);
+                    ctx.SaveChanges();
+                }
+                ts.Complete();
+            }
+
+        }
+        public void changeCompetenciaFunc(int id, int newCompt, int oldCompt)
+        {
+            bool fail;
+            using (ts)
+            {
+                using (ctx = new L51NG1Entities())
+                {
+                    do
+                    {
+                        fail = false;
+                        try
+                        {
+                            var funcionario = ctx.Funcionarios.Where(f => f.id == id).FirstOrDefault();
+                            var oldCompetencia = funcionario.Competencias.Where(c => c.id == oldCompt).SingleOrDefault();
+                            funcionario.Competencias.Remove(oldCompetencia);
+                            var newCompetencia = ctx.Competencias.Where(c => c.id == newCompt).SingleOrDefault();
+                            funcionario.Competencias.Add(newCompetencia);
+                            ctx.SaveChanges();
+                        }
+                        catch (DbUpdateConcurrencyException e)
+                        {
+
+                            fail = true;
+                            // esmagar as alterações na BD
+                            var entry = e.Entries.Single();
+                            var dbValues = entry.GetDatabaseValues();
+                            entry.OriginalValues.SetValues(dbValues);
+                        }
+                    } while (fail);
                 }
                 ts.Complete();
             }

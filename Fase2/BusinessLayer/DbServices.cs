@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Model;
 
 namespace BusinessLayer
 {
@@ -20,7 +20,7 @@ namespace BusinessLayer
         {
             Console.WriteLine("Inserir competencia : ");
             string competencia = Console.ReadLine();
-            Model.Equipa eq = servicesContext.getEquipaLivre(competencia);
+            Equipa eq = servicesContext.getEquipaLivre(competencia);
             if (eq != null)
                 Console.WriteLine(eq.ToString());
             else
@@ -28,13 +28,13 @@ namespace BusinessLayer
         }
         public void insertIntervencaoWithProcedure()
         {
-            Model.Intervencao intervencao = insertIntervencaoValues();
+            Intervencao intervencao = insertIntervencaoValues();
             servicesContext.insertIntervencaoWithProcedure(intervencao);
         }
 
         public void insertEquipa()
         {
-            Model.Equipa equipa = new Model.Equipa();
+            Equipa equipa = new Equipa();
             int id;
             Console.WriteLine("Inserir id da Equipa");
             while (!Int32.TryParse(Console.ReadLine(), out id))
@@ -47,7 +47,7 @@ namespace BusinessLayer
 
         public void insertOrDeleteEquipaFunc()
         {
-            Model.EquipaFunc equipaFunc = new Model.EquipaFunc();
+            EquipaFunc equipaFunc = new EquipaFunc();
             Console.WriteLine("Escolher opção: insert ; delete");
             string option;
             while (true)
@@ -86,10 +86,10 @@ namespace BusinessLayer
             int ano;
             while (!Int32.TryParse(Console.ReadLine(), out ano))
                 Console.WriteLine("Valor tem de ser inteiro entre 1990 e 2100\n");
-            List<Model.Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
+            List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
             if (intervencoes != null && intervencoes.Any())
             {
-                foreach (Model.Intervencao i in intervencoes)
+                foreach (Intervencao i in intervencoes)
                 {
                     Console.WriteLine($"id: {i.id} ; descrição: {i.descricao}");
                 }
@@ -100,16 +100,16 @@ namespace BusinessLayer
         }
         public void insertIntervencao()
         {
-            Model.Intervencao intervencao = insertIntervencaoValues();
+            Intervencao intervencao = insertIntervencaoValues();
             servicesContext.insertIntervencao(intervencao);
         }
 
         public void insertEquipaIntervencao()
         {
-            Model.Intervencao intervencao = insertIntervencaoValues();
+            Intervencao intervencao = insertIntervencaoValues();
             try
             {
-                Model.Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
+                Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
                 Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
                 servicesContext.insertIntervencaoWithProcedure(intervencao);
                 intervencao.estado = insertEstado();
@@ -120,10 +120,27 @@ namespace BusinessLayer
                 Console.WriteLine(e.Message);
             }
         }
-
-        public Model.Intervencao insertIntervencaoValues()
+        public void changeCompetenciaFunc()
         {
-            Model.Intervencao intervencao = new Model.Intervencao();
+            int id;
+            int newCompt;
+            int oldCompt;
+            Console.WriteLine("Inserir id do funcionario");
+            while (!Int32.TryParse(Console.ReadLine(), out id))
+                Console.WriteLine("Valor tem de ser inteiro\n");
+            Console.WriteLine("Inserir id da competencia a substituir");
+            while (!Int32.TryParse(Console.ReadLine(), out oldCompt))
+                Console.WriteLine("Valor tem de ser inteiro\n");
+            Console.WriteLine("Inserir id da nova competencia");
+            while (!Int32.TryParse(Console.ReadLine(), out newCompt))
+                Console.WriteLine("Valor tem de ser inteiro\n");
+            servicesContext.changeCompetenciaFunc(id, newCompt, oldCompt);
+
+        }
+
+        public Intervencao insertIntervencaoValues()
+        {
+            Intervencao intervencao = new Intervencao();
             Console.WriteLine("Inserir id da Intervencao");
             int id;
             while (!Int32.TryParse(Console.ReadLine(), out id))

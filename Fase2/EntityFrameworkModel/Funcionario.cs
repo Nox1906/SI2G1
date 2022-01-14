@@ -11,7 +11,8 @@ namespace EntityFrameworkModel
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Funcionario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,7 +32,9 @@ namespace EntityFrameworkModel
         public string email { get; set; }
         public string ntelefone { get; set; }
         public string profissao { get; set; }
-    
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ativo> Ativos { get; set; }
         public virtual EquipaFunc EquipaFunc { get; set; }

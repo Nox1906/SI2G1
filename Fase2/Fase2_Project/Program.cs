@@ -63,6 +63,7 @@ namespace Fase2_Project
             Console.WriteLine("5 -> Intervenções num ano");
             Console.WriteLine("6 -> Inserir Intervencão");
             Console.WriteLine("7 -> Atribuir intervenção a uma equipa livre");
+            Console.WriteLine("8 -> Substituir competencia a um funcionario");
             Console.WriteLine("0 -> Sair para o menu anterior");
         }
 
@@ -90,6 +91,9 @@ namespace Fase2_Project
                     break;
                 case 7:
                     services.insertEquipaIntervencao();
+                    break;
+                case 8:
+                    services.changeCompetenciaFunc();
                     break;
             }
         }
