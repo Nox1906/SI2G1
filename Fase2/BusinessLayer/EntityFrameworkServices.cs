@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EntityFrameworkModel;
+
 
 namespace BusinessLayer
 {
@@ -13,17 +12,15 @@ namespace BusinessLayer
         EntityFrameworkManager efm;
         public EntityFrameworkServices()
         {
-
+            this.efm = new EntityFrameworkManager();
         }
 
         public Model.Equipa getEquipaLivre(string competencia)
         {
-            efm = new EntityFrameworkManager();
             Model.Equipa resultado = null;
             try
             {
                 resultado = efm.getEquipaLivre(competencia);
-
             }
             catch (Exception e)
             {
@@ -34,7 +31,6 @@ namespace BusinessLayer
 
         public void insertIntervencaoWithProcedure(Model.Intervencao i)
         {
-            efm = new EntityFrameworkManager();
             try
             {
                 efm.insertIntervencaoWithProcedure(i);
@@ -51,7 +47,6 @@ namespace BusinessLayer
         public void insertEquipa(Model.Equipa equipa)
         {
 
-            efm = new EntityFrameworkManager();
             try
             {
                 efm.insertEquipa(equipa);
@@ -80,8 +75,6 @@ namespace BusinessLayer
         public List<Model.Intervencao> getIntervencoesAno(int ano)
         {
             List<Model.Intervencao> intervencoes = new List<Model.Intervencao>();
-            efm = new EntityFrameworkManager();
-
             try
             {
                 List<IntervencaoAno_Result> result = efm.getIntervencoesAno(ano);
@@ -113,18 +106,20 @@ namespace BusinessLayer
         }
 
 
-
-
-
-
-
-
         public void insertIntervencao(Model.Intervencao intervencao)
         {
-            throw new NotImplementedException();
+            try
+            {
+                efm.Create(intervencao);
+                Console.WriteLine("Intervenção inserida com sucesso \n");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        public void insertEquipaIntervencao(Model.Intervencao intervencao)
+        public void insertEquipaIntervencao(Model.Intervencao intervencao, Model.Equipa equipa)
         {
             throw new NotImplementedException();
         }

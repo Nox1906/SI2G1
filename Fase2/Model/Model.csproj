@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Equipa.cs" />
     <Compile Include="EquipaFunc.cs" />
+    <Compile Include="EquipaIntervencao.cs" />
     <Compile Include="Intervencao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

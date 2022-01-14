@@ -38,7 +38,6 @@ namespace EntityFrameworkModel
                 }
                 ts.Complete();
             }
-
             return e != null ? new Model.Equipa { Id = e.id, Localizacao = e.localizacao, NFunc = e.nFunc } : null;
 
         }
@@ -83,6 +82,38 @@ namespace EntityFrameworkModel
                 using (ctx = new L51NG1Entities())
                 {
                     ctx.SP_ActualizarElementosEquipa(equipaFunc.equipaId, equipaFunc.funcId, option, equipaFunc.supervisor);
+                }
+                ts.Complete();
+            }
+        }
+
+        public void Create(Model.Intervencao i)
+        {
+            using (ts)
+            {
+                using (ctx = new L51NG1Entities())
+                {
+                    var intervencion = ctx.Set<Intervencao>();
+                    intervencion.Add(new Intervencao
+                    {
+                        id = i.id,
+                        descricao = i.descricao,
+                        estado = i.estado,
+                        dtInicio = i.dtInicio,
+                        dtFim = i.dtFim,
+                        valor = i.valor,
+                        ativoId = i.ativoId,
+                    });
+                    if (i.meses > 0)
+                    {
+                        var periodic = ctx.Set<IntervencaoPeriodica>();
+                        periodic.Add(new IntervencaoPeriodica
+                        {
+                            id = i.id,
+                            meses = i.meses
+                        });;
+                    }
+                    ctx.SaveChanges();
                 }
                 ts.Complete();
             }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+
 
 namespace BusinessLayer
 {
@@ -22,7 +20,7 @@ namespace BusinessLayer
         {
             Console.WriteLine("Inserir competencia : ");
             string competencia = Console.ReadLine();
-            Equipa eq = servicesContext.getEquipaLivre(competencia);
+            Model.Equipa eq = servicesContext.getEquipaLivre(competencia);
             if (eq != null)
                 Console.WriteLine(eq.ToString());
             else
@@ -30,13 +28,13 @@ namespace BusinessLayer
         }
         public void insertIntervencaoWithProcedure()
         {
-            Intervencao intervencao = insertIntervencaoValues();
+            Model.Intervencao intervencao = insertIntervencaoValues();
             servicesContext.insertIntervencaoWithProcedure(intervencao);
         }
 
         public void insertEquipa()
         {
-            Equipa equipa = new Equipa();
+            Model.Equipa equipa = new Model.Equipa();
             int id;
             Console.WriteLine("Inserir id da Equipa");
             while (!Int32.TryParse(Console.ReadLine(), out id))
@@ -49,7 +47,7 @@ namespace BusinessLayer
 
         public void insertOrDeleteEquipaFunc()
         {
-            EquipaFunc equipaFunc = new EquipaFunc();
+            Model.EquipaFunc equipaFunc = new Model.EquipaFunc();
             Console.WriteLine("Escolher opção: insert ; delete");
             string option;
             while (true)
@@ -88,10 +86,10 @@ namespace BusinessLayer
             int ano;
             while (!Int32.TryParse(Console.ReadLine(), out ano))
                 Console.WriteLine("Valor tem de ser inteiro entre 1990 e 2100\n");
-            List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
+            List<Model.Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
             if (intervencoes != null && intervencoes.Any())
             {
-                foreach (Intervencao i in intervencoes)
+                foreach (Model.Intervencao i in intervencoes)
                 {
                     Console.WriteLine($"id: {i.id} ; descrição: {i.descricao}");
                 }
@@ -102,21 +100,20 @@ namespace BusinessLayer
         }
         public void insertIntervencao()
         {
-            Intervencao intervencao = insertIntervencaoValues();
-            intervencao.estado = insertEstado();
+            Model.Intervencao intervencao = insertIntervencaoValues();
             servicesContext.insertIntervencao(intervencao);
         }
 
         public void insertEquipaIntervencao()
         {
-            Intervencao intervencao = insertIntervencaoValues();
+            Model.Intervencao intervencao = insertIntervencaoValues();
             try
             {
-                Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
+                Model.Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
                 Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
                 servicesContext.insertIntervencaoWithProcedure(intervencao);
                 intervencao.estado = insertEstado();
-                servicesContext.insertEquipaIntervencao(intervencao);
+                servicesContext.insertEquipaIntervencao(intervencao, e);
             }
             catch (Exception e)
             {
@@ -124,9 +121,9 @@ namespace BusinessLayer
             }
         }
 
-        public Intervencao insertIntervencaoValues()
+        public Model.Intervencao insertIntervencaoValues()
         {
-            Intervencao intervencao = new Intervencao();
+            Model.Intervencao intervencao = new Model.Intervencao();
             Console.WriteLine("Inserir id da Intervencao");
             int id;
             while (!Int32.TryParse(Console.ReadLine(), out id))

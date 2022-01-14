@@ -3,7 +3,7 @@ using DataLayer.QueryObjects;
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace BusinessLayer
 {
@@ -14,11 +14,10 @@ namespace BusinessLayer
 
         public ADONetServices()
         {
-            
+            this.session = new Session();
         }
         public Equipa getEquipaLivre(string competencia)
         {
-            session = new Session();
             IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
             Equipa resultado = null;
             try
@@ -39,7 +38,6 @@ namespace BusinessLayer
 
         public void insertIntervencaoWithProcedure(Intervencao intervencao)
         {
-            session = new Session();
             IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             try
             {
@@ -57,7 +55,6 @@ namespace BusinessLayer
         }
         public void insertEquipa(Equipa equipa)
         {
-            session = new Session();
             IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
             try
             {
@@ -76,7 +73,6 @@ namespace BusinessLayer
 
         public void insertOrDeleteEquipaFunc(EquipaFunc equipaFunc, string option)
         {
-            session = new Session();
             IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
             try
             {
@@ -95,7 +91,6 @@ namespace BusinessLayer
 
         public List<Intervencao> getIntervencoesAno(int ano)
         {
-            session = new Session();
             IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             List<Intervencao> intervencoes = null;
             try
@@ -115,7 +110,6 @@ namespace BusinessLayer
 
         public void insertIntervencao(Intervencao intervencao)
         {
-            session = new Session();
             IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
             try
             {
@@ -131,13 +125,14 @@ namespace BusinessLayer
                 this.session.closeCon();
             }
         }
-        public void insertEquipaIntervencao(Intervencao intervencao)
+        public void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa)
         {
-            session = new Session();
             IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+            IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
+            EquipaIntervencao equipaIntervecao = new EquipaIntervencao { equipaId = equipa.Id, idIntervencao = intervencao.id };
             try
             {
-                
+                equipaIntervencaoMapper.Update(equipaIntervecao);
                 ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
             }
             catch (Exception e)

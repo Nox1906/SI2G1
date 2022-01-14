@@ -20,13 +20,13 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.cs
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\obj\Debug\BusinessLayer.pdb
-C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.dll
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.dll
-C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.pdb
-C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkServices.dll.config
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.xml
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.pdb
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll.config
 C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll.config

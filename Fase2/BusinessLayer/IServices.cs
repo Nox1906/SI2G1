@@ -15,10 +15,6 @@ namespace BusinessLayer
         void insertOrDeleteEquipaFunc(EquipaFunc equipaFunc, string option);
         List<Intervencao> getIntervencoesAno(int ano);
         void insertIntervencao(Intervencao intervencao);
-
-
-
-
-        void insertEquipaIntervencao(Intervencao intervencao);
+        void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa);
     }
 }
