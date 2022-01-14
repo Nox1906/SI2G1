@@ -32,7 +32,9 @@ namespace EntityFrameworkModel
                 {
                     string sqlQuery = "SELECT [dbo].[F_ObterEquipaLivre] ({0})";
                     Object[] parameters = { competencia };
+
                     r = ctx.Database.SqlQuery<int>(sqlQuery, parameters).FirstOrDefault();
+                    Console.WriteLine();
                     e = (from i in ctx.Equipas
                          where i.id == r
                          select i).SingleOrDefault();
@@ -126,10 +128,10 @@ namespace EntityFrameworkModel
                 using (ctx = new L51NG1Entities())
                 {
                     var e = (from i in ctx.EquipaIntervencaos where i.idIntervencao == intervencao.id select i).SingleOrDefault();
+
                     e.equipaId = equipa.Id;
 
                     ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);
-                    ctx.SaveChanges();
                 }
                 ts.Complete();
             }

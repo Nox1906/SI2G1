@@ -110,10 +110,14 @@ namespace BusinessLayer
             try
             {
                 Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
-                Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
-                servicesContext.insertIntervencaoWithProcedure(intervencao);
-                intervencao.estado = insertEstado();
-                servicesContext.insertEquipaIntervencao(intervencao, e);
+                if (e != null)
+                {
+                    Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
+                    servicesContext.insertIntervencaoWithProcedure(intervencao);
+                    intervencao.estado = insertEstado();
+                    servicesContext.insertEquipaIntervencao(intervencao, e);
+                }
+
             }
             catch (Exception e)
             {
@@ -138,9 +142,9 @@ namespace BusinessLayer
             Console.WriteLine("Inserir id da competencia do segundo funcionario");
             while (!Int32.TryParse(Console.ReadLine(), out idComptFunc2))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            
 
-            servicesContext.changeCompetenciaFunc(idFunc1,idFunc2, idComptFunc1, idComptFunc2);
+
+            servicesContext.changeCompetenciaFunc(idFunc1, idFunc2, idComptFunc1, idComptFunc2);
 
         }
 
