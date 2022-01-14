@@ -146,9 +146,9 @@ namespace BusinessLayer
             }
         }
 
-        public void changeCompetenciaFunc(int id,int newCompt, int oldCompt)
+        public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Only implemented using Entity Framework");
         }
     }
 }

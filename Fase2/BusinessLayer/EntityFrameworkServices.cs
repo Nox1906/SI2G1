@@ -136,13 +136,13 @@ namespace BusinessLayer
                 Console.WriteLine(e.Message);
             }
         }
-        public void changeCompetenciaFunc(int id, int newCompt, int oldCompt)
+        public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
             this.efm = new EntityFrameworkManager();
             try
             {
-                efm.changeCompetenciaFunc(id, newCompt, oldCompt);
-                Console.WriteLine("Competencia com id = " + oldCompt + " substituida pela com id  = " + newCompt + " no funcionario " +id+"\n");
+                efm.changeCompetenciaFunc(idFunc1, idFunc2, idCompFunc1,idCompFunc2);
+                Console.WriteLine("Competencias trocadas com sucesso entre funcionario "+ idFunc1+ " e "+idFunc2);
 
             }
             catch (Exception e)

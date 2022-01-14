@@ -135,7 +135,7 @@ namespace EntityFrameworkModel
             }
 
         }
-        public void changeCompetenciaFunc(int id, int newCompt, int oldCompt)
+        public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
             bool fail;
             using (ts)
@@ -147,11 +147,17 @@ namespace EntityFrameworkModel
                         fail = false;
                         try
                         {
-                            var funcionario = ctx.Funcionarios.Where(f => f.id == id).FirstOrDefault();
-                            var oldCompetencia = funcionario.Competencias.Where(c => c.id == oldCompt).SingleOrDefault();
-                            funcionario.Competencias.Remove(oldCompetencia);
-                            var newCompetencia = ctx.Competencias.Where(c => c.id == newCompt).SingleOrDefault();
-                            funcionario.Competencias.Add(newCompetencia);
+                            var funcionario1 = ctx.Funcionarios.Where(f => f.id == idFunc1).FirstOrDefault();
+                            var funcionario2 = ctx.Funcionarios.Where(f => f.id == idFunc2).FirstOrDefault();
+
+                            var comptFunc1 = funcionario1.Competencias.Where(c => c.id == idCompFunc1).SingleOrDefault();
+                            var comptFunc2 = funcionario2.Competencias.Where(c => c.id == idCompFunc2).SingleOrDefault();
+
+                            funcionario1.Competencias.Remove(comptFunc1);
+                            funcionario2.Competencias.Remove(comptFunc2);
+
+                            funcionario1.Competencias.Add(comptFunc2);
+                            funcionario2.Competencias.Add(comptFunc1);
                             ctx.SaveChanges();
                         }
                         catch (DbUpdateConcurrencyException e)

@@ -122,19 +122,25 @@ namespace BusinessLayer
         }
         public void changeCompetenciaFunc()
         {
-            int id;
-            int newCompt;
-            int oldCompt;
-            Console.WriteLine("Inserir id do funcionario");
-            while (!Int32.TryParse(Console.ReadLine(), out id))
+            int idFunc1;
+            int idFunc2;
+            int idComptFunc1;
+            int idComptFunc2;
+            Console.WriteLine("Inserir id do primeiro funcionario");
+            while (!Int32.TryParse(Console.ReadLine(), out idFunc1))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            Console.WriteLine("Inserir id da competencia a substituir");
-            while (!Int32.TryParse(Console.ReadLine(), out oldCompt))
+            Console.WriteLine("Inserir id do segundo funcionario");
+            while (!Int32.TryParse(Console.ReadLine(), out idFunc2))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            Console.WriteLine("Inserir id da nova competencia");
-            while (!Int32.TryParse(Console.ReadLine(), out newCompt))
+            Console.WriteLine("Inserir id da competencia do primeiro funcionario");
+            while (!Int32.TryParse(Console.ReadLine(), out idComptFunc1))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            servicesContext.changeCompetenciaFunc(id, newCompt, oldCompt);
+            Console.WriteLine("Inserir id da competencia do segundo funcionario");
+            while (!Int32.TryParse(Console.ReadLine(), out idComptFunc2))
+                Console.WriteLine("Valor tem de ser inteiro\n");
+            
+
+            servicesContext.changeCompetenciaFunc(idFunc1,idFunc2, idComptFunc1, idComptFunc2);
 
         }
 
