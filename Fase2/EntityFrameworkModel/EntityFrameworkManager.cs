@@ -19,22 +19,24 @@ namespace EntityFrameworkModel
                 IsolationLevel = IsolationLevel.ReadCommitted,
                 Timeout = TimeSpan.FromMinutes(2)
             };
+        }
+        public void openTransactionScope()
+        {
             ts = new TransactionScope(TransactionScopeOption.Required, options);
         }
-
         public Model.Equipa getEquipaLivre(string competencia)
         {
-            Equipa e;
+            Equipa e = null; ;
             int r;
+
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
                 {
                     string sqlQuery = "SELECT [dbo].[F_ObterEquipaLivre] ({0})";
                     Object[] parameters = { competencia };
-
                     r = ctx.Database.SqlQuery<int>(sqlQuery, parameters).FirstOrDefault();
-                    Console.WriteLine();
                     e = (from i in ctx.Equipas
                          where i.id == r
                          select i).SingleOrDefault();
@@ -42,21 +44,22 @@ namespace EntityFrameworkModel
                 ts.Complete();
             }
             return e != null ? new Model.Equipa { Id = e.id, Localizacao = e.localizacao, NFunc = e.nFunc } : null;
-
         }
         public void insertIntervencaoWithProcedure(Model.Intervencao i)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
                 {
                     ctx.SP_criaInter(i.id, i.descricao, i.dtInicio, i.dtFim, i.valor, i.ativoId, i.meses);
-                }
+                    ctx.SaveChanges();                }
                 ts.Complete();
             }
         }
         public void insertEquipa(Model.Equipa e)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
@@ -69,6 +72,7 @@ namespace EntityFrameworkModel
 
         public List<IntervencaoAno_Result> getIntervencoesAno(int ano)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
@@ -80,6 +84,7 @@ namespace EntityFrameworkModel
 
         public void insertOrDeleteEquipaFunc(Model.EquipaFunc equipaFunc, string option)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
@@ -92,6 +97,7 @@ namespace EntityFrameworkModel
 
         public void insertIntervencao(Model.Intervencao i)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
@@ -123,23 +129,23 @@ namespace EntityFrameworkModel
         }
         public void insertEquipaIntervencao(Model.Intervencao intervencao, Model.Equipa equipa)
         {
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())
                 {
-                    var e = (from i in ctx.EquipaIntervencaos where i.idIntervencao == intervencao.id select i).SingleOrDefault();
-
-                    e.equipaId = equipa.Id;
-
-                    ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);
+                    var equipaInter = ctx.EquipaIntervencaos.Where(eq => eq.idIntervencao == intervencao.id).SingleOrDefault();
+                    equipaInter.equipaId = equipa.Id;
+                    ctx.SaveChanges();
+                    ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);                  
                 }
                 ts.Complete();
             }
-
         }
         public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
             bool fail;
+            openTransactionScope();
             using (ts)
             {
                 using (ctx = new L51NG1Entities())

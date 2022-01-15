@@ -20,16 +20,29 @@ namespace BusinessLayer
         {
             Console.WriteLine("Inserir competencia : ");
             string competencia = Console.ReadLine();
-            Equipa eq = servicesContext.getEquipaLivre(competencia);
-            if (eq != null)
+            try
+            {
+                Equipa eq = servicesContext.getEquipaLivre(competencia);
                 Console.WriteLine(eq.ToString());
-            else
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine("Não há equipas disponiveis");
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
         }
         public void insertIntervencaoWithProcedure()
         {
-            Intervencao intervencao = insertIntervencaoValues();
-            servicesContext.insertIntervencaoWithProcedure(intervencao);
+            try
+            {
+                Intervencao intervencao = insertIntervencaoValues();
+                servicesContext.insertIntervencaoWithProcedure(intervencao);
+                Console.WriteLine("Intervenção inserida com sucesso \n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
         }
 
         public void insertEquipa()
@@ -42,7 +55,15 @@ namespace BusinessLayer
             equipa.Id = id;
             Console.WriteLine("Inserir localização");
             equipa.Localizacao = Console.ReadLine();
-            servicesContext.insertEquipa(equipa);
+            try
+            {
+                servicesContext.insertEquipa(equipa);
+                Console.WriteLine("Equipa inserida com sucesso \n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
         }
 
         public void insertOrDeleteEquipaFunc()
@@ -76,8 +97,15 @@ namespace BusinessLayer
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Valor tem de ser inteiro\n");
             equipaFunc.supervisor = id;
-            servicesContext.insertOrDeleteEquipaFunc(equipaFunc, option);
-
+            try
+            {
+                servicesContext.insertOrDeleteEquipaFunc(equipaFunc, option);
+                Console.WriteLine("Operação realizada com sucesso \n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
         }
 
         public void getIntervencoesAno()
@@ -86,42 +114,50 @@ namespace BusinessLayer
             int ano;
             while (!Int32.TryParse(Console.ReadLine(), out ano))
                 Console.WriteLine("Valor tem de ser inteiro entre 1990 e 2100\n");
-            List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
-            if (intervencoes != null && intervencoes.Any())
+            try
             {
+                List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
                 foreach (Intervencao i in intervencoes)
                 {
                     Console.WriteLine($"id: {i.id} ; descrição: {i.descricao}");
                 }
                 intervencoes.Clear();
             }
-            else
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
                 Console.WriteLine("Não existem intervenções nesse ano");
+            }
         }
+
         public void insertIntervencao()
         {
             Intervencao intervencao = insertIntervencaoValues();
-            servicesContext.insertIntervencao(intervencao);
+            try
+            {
+                servicesContext.insertIntervencao(intervencao);
+                Console.WriteLine("Intervenção inserida com sucesso \n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
         }
-
         public void insertEquipaIntervencao()
         {
             Intervencao intervencao = insertIntervencaoValues();
             try
             {
-                Equipa e = servicesContext.getEquipaLivre(intervencao.descricao);
-                if (e != null)
-                {
-                    Console.WriteLine($"Equipa que será atribuída à intervençao: \n {e} ");
-                    servicesContext.insertIntervencaoWithProcedure(intervencao);
-                    intervencao.estado = insertEstado();
-                    servicesContext.insertEquipaIntervencao(intervencao, e);
-                }
-
+                Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
+                Console.WriteLine($"Equipa que será atribuída à intervençao: \n {equipa} ");
+                servicesContext.insertIntervencaoWithProcedure(intervencao);
+                intervencao.estado = insertEstado();
+                servicesContext.insertEquipaIntervencao(intervencao, equipa);
+                Console.WriteLine("Equipa com id = " + equipa.Id + " atribuida à intervenção com id = " + intervencao.id + "\n");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(ex.GetBaseException().Message);
             }
         }
         public void changeCompetenciaFunc()
@@ -142,10 +178,15 @@ namespace BusinessLayer
             Console.WriteLine("Inserir id da competencia do segundo funcionario");
             while (!Int32.TryParse(Console.ReadLine(), out idComptFunc2))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-
-
-            servicesContext.changeCompetenciaFunc(idFunc1, idFunc2, idComptFunc1, idComptFunc2);
-
+            try
+            {
+                servicesContext.changeCompetenciaFunc(idFunc1, idFunc2, idComptFunc1, idComptFunc2);
+                Console.WriteLine("Competencias trocadas com sucesso entre funcionario " + idFunc1 + " e " + idFunc2);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public Intervencao insertIntervencaoValues()

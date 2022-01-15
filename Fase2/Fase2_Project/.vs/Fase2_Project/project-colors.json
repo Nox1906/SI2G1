@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6ac01bda-bf0b-44f0-802e-815f6ada6ced": {
+      "ProjectGuid": "6ac01bda-bf0b-44f0-802e-815f6ada6ced",
+      "DisplayName": "EntityFrameworkModel",
+      "ColorIndex": 0
+    },
+    "6f4ebcd3-c5b9-4894-98f5-69a55352e7e4": {
+      "ProjectGuid": "6f4ebcd3-c5b9-4894-98f5-69a55352e7e4",
+      "DisplayName": "BusinessLayer",
+      "ColorIndex": 1
+    },
+    "764f9bcb-6923-4d5f-b6f3-0fe09d311da3": {
+      "ProjectGuid": "764f9bcb-6923-4d5f-b6f3-0fe09d311da3",
+      "DisplayName": "Model",
+      "ColorIndex": 2
+    },
+    "c4488015-11e6-46c9-b590-f3feb7722983": {
+      "ProjectGuid": "c4488015-11e6-46c9-b590-f3feb7722983",
+      "DisplayName": "Fase2_Project",
+      "ColorIndex": 3
+    },
+    "3b2e44b6-b54b-41c3-a880-5228f51e11ce": {
+      "ProjectGuid": "3b2e44b6-b54b-41c3-a880-5228f51e11ce",
+      "DisplayName": "DataLayer",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

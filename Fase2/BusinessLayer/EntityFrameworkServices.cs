@@ -2,85 +2,74 @@
 using System;
 using System.Collections.Generic;
 using EntityFrameworkModel;
-
+using System.Transactions;
 
 namespace BusinessLayer
 {
     public class EntityFrameworkServices : IServices
-
     {
+        TransactionOptions options;
+        TransactionScope ts;
         EntityFrameworkManager efm;
         public EntityFrameworkServices()
         {
-            
+            efm = new EntityFrameworkManager();
+            options = new TransactionOptions()
+            {
+                IsolationLevel = IsolationLevel.ReadCommitted,
+                Timeout = TimeSpan.FromMinutes(2)
+            };
         }
-
+        public void openTransactionScope()
+        {
+            ts = new TransactionScope(TransactionScopeOption.Required, options);
+        }
         public Model.Equipa getEquipaLivre(string competencia)
         {
-            this.efm = new EntityFrameworkManager();
             Model.Equipa resultado = null;
-            try
+            openTransactionScope();
+            using (ts)
             {
                 resultado = efm.getEquipaLivre(competencia);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Não existem equipas livres");
+                ts.Complete();
             }
             return resultado;
         }
-
         public void insertIntervencaoWithProcedure(Model.Intervencao i)
         {
-            this.efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
                 efm.insertIntervencaoWithProcedure(i);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-
+                ts.Complete();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
         }
-
         public void insertEquipa(Model.Equipa equipa)
         {
-            this.efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
                 efm.insertEquipa(equipa);
-                Console.WriteLine("Equipa inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                ts.Complete();
             }
         }
         public void insertOrDeleteEquipaFunc(Model.EquipaFunc equipaFunc, string option)
         {
-            efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
                 efm.insertOrDeleteEquipaFunc(equipaFunc, option);
-                Console.WriteLine("Operação realizada com sucesso \n");
+                ts.Complete();               
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
         }
-
         public List<Model.Intervencao> getIntervencoesAno(int ano)
         {
-            this.efm = new EntityFrameworkManager();
             List<Model.Intervencao> intervencoes = new List<Model.Intervencao>();
-            try
+            openTransactionScope();
+            using (ts)
             {
                 List<IntervencaoAno_Result> result = efm.getIntervencoesAno(ano);
+                ts.Complete();
                 if (result != null)
                 {
                     foreach (IntervencaoAno_Result e in result)
@@ -98,58 +87,35 @@ namespace BusinessLayer
                         });
                     }
                 }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
             return intervencoes;
-
         }
-
-
         public void insertIntervencao(Model.Intervencao intervencao)
         {
-            this.efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
                 efm.insertIntervencao(intervencao);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                ts.Complete();              
             }
         }
-
         public void insertEquipaIntervencao(Model.Intervencao intervencao, Model.Equipa equipa)
         {
-            this.efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                efm.insertEquipaIntervencao(intervencao,equipa);
-                Console.WriteLine("Equipa com id = "+ equipa.Id+" atribuida à intervenção com id = "+intervencao.id+"\n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                efm.insertEquipaIntervencao(intervencao, equipa);
+                ts.Complete();               
             }
         }
         public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
-            this.efm = new EntityFrameworkManager();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                efm.changeCompetenciaFunc(idFunc1, idFunc2, idCompFunc1,idCompFunc2);
-                Console.WriteLine("Competencias trocadas com sucesso entre funcionario "+ idFunc1+ " e "+idFunc2);
-
+                efm.changeCompetenciaFunc(idFunc1, idFunc2, idCompFunc1, idCompFunc2);
+                ts.Complete();               
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
         }
     }
 }

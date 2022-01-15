@@ -3,7 +3,7 @@ using DataLayer.QueryObjects;
 using Model;
 using System;
 using System.Collections.Generic;
-
+using System.Data.SqlClient;
 
 namespace BusinessLayer
 {
@@ -18,136 +18,82 @@ namespace BusinessLayer
         }
         public Equipa getEquipaLivre(string competencia)
         {
-            IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
-            Equipa resultado = null;
-            try
+            Equipa resultado;
+            using (session)
             {
+                IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
                 resultado = ((EquipaMapper)equipaMapper).getFreeTeam(competencia);
+
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                session.closeCon();
-            }
+            SqlConnection e = session.getCurrCon();
             return resultado;
         }
 
 
         public void insertIntervencaoWithProcedure(Intervencao intervencao)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-            try
+            using (session)
             {
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
                 intervencaoMapper.CreateWithSP(intervencao);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                session.closeCon();
             }
         }
         public void insertEquipa(Equipa equipa)
         {
-            IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
-            try
+            using (session)
             {
+                IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
                 equipaMapper.CreateWithSP(equipa);
-                Console.WriteLine("Equipa inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                session.closeCon();
             }
         }
 
         public void insertOrDeleteEquipaFunc(EquipaFunc equipaFunc, string option)
         {
-            IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
-            try
+            using (session)
             {
+                IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
                 ((EquipaFuncMapper)equipaFuncMapper).insertOrDeleteEquipaFunc(equipaFunc, option);
-                Console.WriteLine("Operação inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                session.closeCon();
             }
         }
 
         public List<Intervencao> getIntervencoesAno(int ano)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-            List<Intervencao> intervencoes = null;
-            try
+            List<Intervencao> intervencoes;
+            using (session)
             {
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
                 intervencoes = ((IntervencaoMapper)intervencaoMapper).getIntervencoesAno(ano);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                session.closeCon();
-            }
+            SqlConnection e = session.getCurrCon();
             return intervencoes;
         }
 
         public void insertIntervencao(Intervencao intervencao)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-            try
+            using (session)
             {
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
                 intervencaoMapper.Create(intervencao);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                this.session.closeCon();
             }
         }
         public void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa)
         {
-            IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-            IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
-            EquipaIntervencao equipaIntervecao = new EquipaIntervencao { equipaId = equipa.Id, idIntervencao = intervencao.id };
-            try
+            using (session)
             {
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
+                EquipaIntervencao equipaIntervecao = new EquipaIntervencao { equipaId = equipa.Id, idIntervencao = intervencao.id };
                 equipaIntervencaoMapper.Update(equipaIntervecao);
                 ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
-                Console.WriteLine("Equipa com id = " + equipa.Id + " atribuida à intervenção com id = " + intervencao.id + "\n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                this.session.closeCon();
             }
         }
 
         public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
+            using (session)
+            {
+
+            }
             Console.WriteLine("Only implemented using Entity Framework");
         }
     }
