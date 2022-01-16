@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "..\Busines
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkModel", "..\EntityFrameworkModel\EntityFrameworkModel.csproj", "{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "..\Benchmark\Benchmark.csproj", "{B64B6D6E-6DE6-4CC6-96D6-B9232A49832D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B64B6D6E-6DE6-4CC6-96D6-B9232A49832D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B64B6D6E-6DE6-4CC6-96D6-B9232A49832D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B64B6D6E-6DE6-4CC6-96D6-B9232A49832D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B64B6D6E-6DE6-4CC6-96D6-B9232A49832D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

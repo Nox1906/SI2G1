@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace DataLayer.DataMappers
 {
-    public interface ISession :IDisposable
+    public interface ISession : IDisposable
     {
-        bool beginTran();
+        bool BeginTran();
         bool openCon();
-        void endTran(bool myVote,bool IsMyTran);
         void closeCon();
         SqlConnection getCurrCon();
-        SqlTransaction getCurrTran();
         SqlCommand CreateCommand();
     }
 }

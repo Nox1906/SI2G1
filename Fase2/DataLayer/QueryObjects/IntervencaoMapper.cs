@@ -72,7 +72,7 @@ namespace DataLayer.QueryObjects
 
                 using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    if (session.beginTran())
+                    if (session.BeginTran())
                     {
                         cmd.CommandText = InsertIntervencaoText;
                         cmd.Parameters.AddWithValue("@id", entity.id);
@@ -97,7 +97,7 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public void Delete(Intervencao entity)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -112,7 +112,7 @@ namespace DataLayer.QueryObjects
 
                 using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    if (session.beginTran())
+                    if (session.BeginTran())
                     {
                         cmd.CommandText = GetIntervencionText;
                         cmd.Parameters.AddWithValue("@id", id);

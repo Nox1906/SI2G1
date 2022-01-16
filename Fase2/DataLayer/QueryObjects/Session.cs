@@ -1,5 +1,6 @@
 ﻿using DataLayer.DataMappers;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
 
@@ -9,13 +10,14 @@ namespace DataLayer.QueryObjects
     {
         private string connection;
         private SqlConnection con = null;
-        private SqlTransaction tran = null;
-        private bool TranVotes;
+
         public Session()
         {
             connection = ConfigurationManager.ConnectionStrings["L51NG1"].ConnectionString; ;
+
         }
-        public bool beginTran()
+
+        public bool BeginTran()
         {
             if (con != null)
             {
@@ -43,29 +45,15 @@ namespace DataLayer.QueryObjects
 
         public void Dispose()
         {
-            if (con != null) con.Dispose();
-        }
-
-        public void endTran(bool myVote, bool IsMyTran)
-        {
-            TranVotes &= myVote;
-            if (IsMyTran)
+            if (con != null && con.State != ConnectionState.Closed)
             {
-                if (TranVotes) tran.Commit();
-                else tran.Rollback();
+                closeCon();
             }
-            tran = null;
         }
 
         public SqlConnection getCurrCon()
         {
             return con;
-        }
-
-        public SqlTransaction getCurrTran()
-        {
-
-            return tran;
         }
 
         public bool openCon()

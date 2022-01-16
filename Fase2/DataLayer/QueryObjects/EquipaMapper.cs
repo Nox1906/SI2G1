@@ -36,7 +36,7 @@ namespace DataLayer.QueryObjects
             throw new NotImplementedException();
         }
 
-        public void Delete(Equipa entity)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -49,10 +49,11 @@ namespace DataLayer.QueryObjects
                 Equipa e = new Equipa();
                 TransactionOptions topt = new TransactionOptions();
                 topt.IsolationLevel = IsolationLevel.ReadCommitted;
+               
 
                 using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    if (session.beginTran())
+                    if (session.BeginTran())
                     {
                         cmd.CommandText = GetEquipaText;
                         cmd.Parameters.AddWithValue("@id", id);

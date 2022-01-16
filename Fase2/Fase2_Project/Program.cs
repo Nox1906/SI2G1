@@ -25,6 +25,12 @@ namespace Fase2_Project
                         services = new DbServices(false);
                         secondMenu(services);
                         break;
+                    case 3:
+                        services = new DbServices(true);
+                        services.testes();
+                        DbServices services2 = new DbServices(false);
+                        services2.testes();
+                        break;
                     case 0:
                         exit = true;
                         break;
@@ -50,6 +56,7 @@ namespace Fase2_Project
             Console.WriteLine("Escolha uma opção");
             Console.WriteLine("1 -> Usar ADONET");
             Console.WriteLine("2 -> Usar Entity Framework");
+            Console.WriteLine("3 -> Testes comparativos entre ADONET e EF");
             Console.WriteLine("0 -> Sair");
         }
 

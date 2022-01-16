@@ -24,7 +24,7 @@ namespace DataLayer.QueryObjects
             throw new NotImplementedException();
         }
 
-        public void Delete(EquipaFunc entity)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

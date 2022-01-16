@@ -117,5 +117,15 @@ namespace BusinessLayer
                 ts.Complete();               
             }
         }
+
+        public void clearTest(int id)
+        {
+            openTransactionScope();
+            using (ts)
+            {
+                efm.DeleteEquipaIntervencao(id);
+                ts.Complete();
+            }
+        }
     }
 }

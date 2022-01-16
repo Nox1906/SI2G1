@@ -53,7 +53,8 @@ namespace EntityFrameworkModel
                 using (ctx = new L51NG1Entities())
                 {
                     ctx.SP_criaInter(i.id, i.descricao, i.dtInicio, i.dtFim, i.valor, i.ativoId, i.meses);
-                    ctx.SaveChanges();                }
+                    ctx.SaveChanges();
+                }
                 ts.Complete();
             }
         }
@@ -137,7 +138,7 @@ namespace EntityFrameworkModel
                     var equipaInter = ctx.EquipaIntervencaos.Where(eq => eq.idIntervencao == intervencao.id).SingleOrDefault();
                     equipaInter.equipaId = equipa.Id;
                     ctx.SaveChanges();
-                    ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);                  
+                    ctx.SP_AtualizarEstadoIntervencao(intervencao.id, intervencao.estado);
                 }
                 ts.Complete();
             }
@@ -178,6 +179,24 @@ namespace EntityFrameworkModel
                             entry.OriginalValues.SetValues(dbValues);
                         }
                     } while (fail);
+                }
+                ts.Complete();
+            }
+        }
+
+        public void DeleteEquipaIntervencao(int id)
+        {
+            openTransactionScope();
+            using (ts)
+            {
+                using (ctx = new L51NG1Entities())
+                {
+                    var equipInterv = ctx.EquipaIntervencaos.SingleOrDefault(x => x.idIntervencao == id);
+                    if (equipInterv != null)
+                    {
+                        ctx.EquipaIntervencaos.Remove(equipInterv);
+                        ctx.SaveChanges();
+                    }
                 }
                 ts.Complete();
             }

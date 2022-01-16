@@ -19,6 +19,14 @@ namespace DataLayer.QueryObjects
                 return "update EquipaIntervencao set equipaId = @equipaId where idIntervencao = @idIntervencao";
             }
         }
+
+        private string deleteEquipaIntervencaoText
+        {
+            get
+            {
+                return "delete EquipaIntervencao where idIntervencao = @idIntervencao";
+            }
+        }
         public void Create(EquipaIntervencao entity)
         {
             throw new NotImplementedException();
@@ -29,9 +37,23 @@ namespace DataLayer.QueryObjects
             throw new NotImplementedException();
         }
 
-        public void Delete(EquipaIntervencao entity)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlCommand cmd = session.CreateCommand())
+            {
+                TransactionOptions topt = new TransactionOptions();
+                topt.IsolationLevel = IsolationLevel.ReadCommitted;
+                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    if (session.BeginTran())
+                    {
+                        cmd.CommandText = deleteEquipaIntervencaoText;
+                        cmd.Parameters.AddWithValue("@idIntervencao", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                    ts.Complete();
+                }
+            }
         }
 
         public EquipaIntervencao ReadById(int id)
@@ -47,7 +69,7 @@ namespace DataLayer.QueryObjects
                 topt.IsolationLevel = IsolationLevel.ReadCommitted;
                 using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    if (session.beginTran())
+                    if (session.BeginTran())
                     {
                         cmd.CommandText = updateEquipaText;
                         cmd.Parameters.AddWithValue("@idIntervencao", entity.idIntervencao);
