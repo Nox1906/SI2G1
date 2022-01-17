@@ -139,7 +139,6 @@ namespace BusinessLayer
                 openTransactionScope();
                 using (ts)
                 {
-
                     ts.Complete();
                 }
             }

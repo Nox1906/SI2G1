@@ -9,7 +9,7 @@ namespace DataLayer.QueryObjects
 {
     public class IntervencaoMapper : Mapper, IMapper<Intervencao, int>
     {
-        public IntervencaoMapper(ISession s) : base (s)
+        public IntervencaoMapper(ISession s) : base(s)
         {
         }
 
@@ -67,10 +67,8 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                TransactionOptions topt = new TransactionOptions();
-                topt.IsolationLevel = IsolationLevel.ReadCommitted;
-
-                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                openTransactionScope();
+                using (ts)
                 {
                     if (session.BeginTran())
                     {
@@ -107,10 +105,8 @@ namespace DataLayer.QueryObjects
             using (SqlCommand cmd = session.CreateCommand())
             {
                 Intervencao i = new Intervencao();
-                TransactionOptions topt = new TransactionOptions();
-                topt.IsolationLevel = IsolationLevel.ReadCommitted;
-
-                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                openTransactionScope();
+                using (ts)
                 {
                     if (session.BeginTran())
                     {
@@ -147,19 +143,17 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = updateIntervencionStateWithSPText;
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlParameter i1 = new SqlParameter("@intervencaoID", entity.id);
-                SqlParameter i2 = new SqlParameter("@novoEstado", entity.estado);
-                cmd.Parameters.Add(i1);
-                cmd.Parameters.Add(i2);
-                try
+                openTransactionScope();
+                using (ts)
                 {
+                    cmd.CommandText = updateIntervencionStateWithSPText;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter i1 = new SqlParameter("@intervencaoID", entity.id);
+                    SqlParameter i2 = new SqlParameter("@novoEstado", entity.estado);
+                    cmd.Parameters.Add(i1);
+                    cmd.Parameters.Add(i2);
                     cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    throw e;
+                    ts.Complete();
                 }
             }
         }
@@ -168,53 +162,56 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = insertIntervencaoWithSPText;
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlParameter i1 = new SqlParameter("@id", entity.id);
-                SqlParameter i2 = new SqlParameter("@descricao", entity.descricao);
-                SqlParameter i3 = new SqlParameter("@dtInicio", entity.dtInicio);
-                SqlParameter i4 = new SqlParameter("@dtFim", entity.dtFim);
-                SqlParameter i5 = new SqlParameter("@valor", entity.valor);
-                SqlParameter i6 = new SqlParameter("@ativoId", entity.ativoId);
-                SqlParameter i7 = new SqlParameter("@meses", entity.meses);
-                i3.SqlDbType = System.Data.SqlDbType.Date;
-                i4.SqlDbType = System.Data.SqlDbType.Date;
-                cmd.Parameters.Add(i1);
-                cmd.Parameters.Add(i2);
-                cmd.Parameters.Add(i3);
-                cmd.Parameters.Add(i4);
-                cmd.Parameters.Add(i5);
-                cmd.Parameters.Add(i6);
-                cmd.Parameters.Add(i7);
-                try
+                openTransactionScope();
+                using (ts)
                 {
+                    cmd.CommandText = insertIntervencaoWithSPText;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter i1 = new SqlParameter("@id", entity.id);
+                    SqlParameter i2 = new SqlParameter("@descricao", entity.descricao);
+                    SqlParameter i3 = new SqlParameter("@dtInicio", entity.dtInicio);
+                    SqlParameter i4 = new SqlParameter("@dtFim", entity.dtFim);
+                    SqlParameter i5 = new SqlParameter("@valor", entity.valor);
+                    SqlParameter i6 = new SqlParameter("@ativoId", entity.ativoId);
+                    SqlParameter i7 = new SqlParameter("@meses", entity.meses);
+                    i3.SqlDbType = System.Data.SqlDbType.Date;
+                    i4.SqlDbType = System.Data.SqlDbType.Date;
+                    cmd.Parameters.Add(i1);
+                    cmd.Parameters.Add(i2);
+                    cmd.Parameters.Add(i3);
+                    cmd.Parameters.Add(i4);
+                    cmd.Parameters.Add(i5);
+                    cmd.Parameters.Add(i6);
+                    cmd.Parameters.Add(i7);
                     cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    throw e;
+                    ts.Complete();
                 }
             }
         }
 
-        public List<Intervencao> getIntervencoesAno(int year) 
+        public List<Intervencao> getIntervencoesAno(int year)
         {
             List<Intervencao> interventions = new List<Intervencao>();
-            using (SqlCommand cmd = session.CreateCommand()) 
+            using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = getInterventionByYearText;
-                cmd.Parameters.AddWithValue("@year", year);
-                using (SqlDataReader rd = cmd.ExecuteReader())
+                openTransactionScope();
+                using (ts)
                 {
-                    while (rd.Read())
+                    cmd.CommandText = getInterventionByYearText;
+                    cmd.Parameters.AddWithValue("@year", year);
+                    using (SqlDataReader rd = cmd.ExecuteReader())
                     {
-                        Intervencao i = new Intervencao
+                        while (rd.Read())
                         {
-                            id = rd.GetInt32(0),
-                            descricao = rd.GetString(1),
-                        };
-                        interventions.Add(i);
+                            Intervencao i = new Intervencao
+                            {
+                                id = rd.GetInt32(0),
+                                descricao = rd.GetString(1),
+                            };
+                            interventions.Add(i);
+                        }
                     }
+                    ts.Complete();
                 }
             }
             return interventions;

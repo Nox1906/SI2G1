@@ -10,9 +10,9 @@ using System.Transactions;
 
 namespace DataLayer.QueryObjects
 {
-   public class EquipaMapper : Mapper, IMapper<Equipa, int>
+    public class EquipaMapper : Mapper, IMapper<Equipa, int>
     {
-        public EquipaMapper(ISession s): base(s)
+        public EquipaMapper(ISession s) : base(s)
         {
         }
 
@@ -47,11 +47,8 @@ namespace DataLayer.QueryObjects
             using (SqlCommand cmd = session.CreateCommand())
             {
                 Equipa e = new Equipa();
-                TransactionOptions topt = new TransactionOptions();
-                topt.IsolationLevel = IsolationLevel.ReadCommitted;
-               
-
-                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                openTransactionScope();
+                using (ts)
                 {
                     if (session.BeginTran())
                     {
@@ -84,13 +81,18 @@ namespace DataLayer.QueryObjects
             int equipaId = 0;
             using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = $"SELECT dbo.F_ObterEquipaLivre('{competencia}')";
-                using (SqlDataReader rd = cmd.ExecuteReader())
+                openTransactionScope();
+                using (ts)
                 {
-                    if (rd.Read())
+                    cmd.CommandText = $"SELECT dbo.F_ObterEquipaLivre('{competencia}')";
+                    using (SqlDataReader rd = cmd.ExecuteReader())
                     {
-                        equipaId = rd.GetInt32(0);
+                        if (rd.Read())
+                        {
+                            equipaId = rd.GetInt32(0);
+                        }
                     }
+                    ts.Complete();
                 }
             }
             return equipaId == 0 ? null : ReadById(equipaId);
@@ -98,21 +100,20 @@ namespace DataLayer.QueryObjects
 
         public void CreateWithSP(Equipa entity)
         {
+
             using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = insertEquipaText;
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlParameter i1 = new SqlParameter("@idEquipa", entity.Id);
-                SqlParameter i2 = new SqlParameter("@localizacao", entity.Localizacao);
-                cmd.Parameters.Add(i1);
-                cmd.Parameters.Add(i2);
-                try
+                openTransactionScope();
+                using (ts)
                 {
+                    cmd.CommandText = insertEquipaText;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter i1 = new SqlParameter("@idEquipa", entity.Id);
+                    SqlParameter i2 = new SqlParameter("@localizacao", entity.Localizacao);
+                    cmd.Parameters.Add(i1);
+                    cmd.Parameters.Add(i2);
                     cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    throw e;
+                    ts.Complete();
                 }
             }
         }

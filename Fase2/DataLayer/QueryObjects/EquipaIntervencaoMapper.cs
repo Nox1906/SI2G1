@@ -41,9 +41,8 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                TransactionOptions topt = new TransactionOptions();
-                topt.IsolationLevel = IsolationLevel.ReadCommitted;
-                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                openTransactionScope();
+                using (ts)
                 {
                     if (session.BeginTran())
                     {
@@ -65,9 +64,8 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                TransactionOptions topt = new TransactionOptions();
-                topt.IsolationLevel = IsolationLevel.ReadCommitted;
-                using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required))
+                openTransactionScope();
+                using (ts)
                 {
                     if (session.BeginTran())
                     {

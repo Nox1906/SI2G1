@@ -43,24 +43,20 @@ namespace DataLayer.QueryObjects
         {
             using (SqlCommand cmd = session.CreateCommand())
             {
-                cmd.CommandText = insertorDeleteEquipaFuncText;
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlParameter i1 = new SqlParameter("@equipaId", entity.equipaId);
-                SqlParameter i2 = new SqlParameter("@FuncId", entity.funcId);
-                SqlParameter i3 = new SqlParameter("@operationType", option);
-                SqlParameter i4 = new SqlParameter("@supervisor", entity.supervisor);
-                cmd.Parameters.Add(i1);
-                cmd.Parameters.Add(i2);
-                cmd.Parameters.Add(i3);
-                cmd.Parameters.Add(i4);
-
-                try
+                openTransactionScope();
+                using (ts)
                 {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    throw e;
+                    cmd.CommandText = insertorDeleteEquipaFuncText;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter i1 = new SqlParameter("@equipaId", entity.equipaId);
+                    SqlParameter i2 = new SqlParameter("@FuncId", entity.funcId);
+                    SqlParameter i3 = new SqlParameter("@operationType", option);
+                    SqlParameter i4 = new SqlParameter("@supervisor", entity.supervisor);
+                    cmd.Parameters.Add(i1);
+                    cmd.Parameters.Add(i2);
+                    cmd.Parameters.Add(i3);
+                    cmd.Parameters.Add(i4);
+                    ts.Complete();
                 }
             }
         }

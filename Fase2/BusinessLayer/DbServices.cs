@@ -164,7 +164,9 @@ namespace BusinessLayer
 
         public void testes()
         {
-            Intervencao intervencao = new Intervencao { id = 1234,
+            Intervencao intervencao = new Intervencao
+            {
+                id = 1234,
                 descricao = "avaria",
                 estado = "em análise",
                 dtInicio = DateTime.Parse("28-10-2021"),
@@ -174,15 +176,18 @@ namespace BusinessLayer
                 meses = 2
             };
             string tipo;
-            if (servicesContext is ADONetServices) tipo = "ADONetServices"; else tipo = "EFServices"; 
+            if (servicesContext is ADONetServices) tipo = "ADONetServices"; else tipo = "EFServices";
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            servicesContext.insertIntervencao(intervencao);
-            Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
-            servicesContext.insertEquipaIntervencao(intervencao, equipa);
-            servicesContext.clearTest(intervencao.id);
+            for (int i = 0; i < 100; i++)
+            {
+                servicesContext.insertIntervencao(intervencao);
+                Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
+                servicesContext.insertEquipaIntervencao(intervencao, equipa);
+                servicesContext.clearTest(intervencao.id);
+            }
             sw.Stop();
-            Console.WriteLine("tempo medido usando {0} = {1}",tipo ,sw.Elapsed);
+            Console.WriteLine("tempo medido usando {0} = {1}", tipo, sw.Elapsed);
         }
         public void changeCompetenciaFunc()
         {
