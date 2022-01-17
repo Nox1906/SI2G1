@@ -65,11 +65,12 @@ namespace DataLayer.QueryObjects
         }
         public void Create(Intervencao entity)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     if (session.BeginTran())
                     {
                         cmd.CommandText = InsertIntervencaoText;
@@ -102,11 +103,11 @@ namespace DataLayer.QueryObjects
 
         public Intervencao ReadById(int id)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            Intervencao i = new Intervencao();
+            openTransactionScope();
+            using (ts)
             {
-                Intervencao i = new Intervencao();
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
                     if (session.BeginTran())
                     {
@@ -141,11 +142,12 @@ namespace DataLayer.QueryObjects
 
         public void UpdateState(Intervencao entity)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     cmd.CommandText = updateIntervencionStateWithSPText;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter i1 = new SqlParameter("@intervencaoID", entity.id);
@@ -160,11 +162,12 @@ namespace DataLayer.QueryObjects
 
         public void CreateWithSP(Intervencao entity)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     cmd.CommandText = insertIntervencaoWithSPText;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter i1 = new SqlParameter("@id", entity.id);
@@ -192,11 +195,12 @@ namespace DataLayer.QueryObjects
         public List<Intervencao> getIntervencoesAno(int year)
         {
             List<Intervencao> interventions = new List<Intervencao>();
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     cmd.CommandText = getInterventionByYearText;
                     cmd.Parameters.AddWithValue("@year", year);
                     using (SqlDataReader rd = cmd.ExecuteReader())

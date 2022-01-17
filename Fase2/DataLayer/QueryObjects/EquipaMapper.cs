@@ -44,12 +44,14 @@ namespace DataLayer.QueryObjects
 
         public Equipa ReadById(int id)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            Equipa e = new Equipa();
+            openTransactionScope();
+            using (ts)
             {
-                Equipa e = new Equipa();
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
+
                     if (session.BeginTran())
                     {
                         cmd.CommandText = GetEquipaText;
@@ -67,8 +69,8 @@ namespace DataLayer.QueryObjects
                     }
                     ts.Complete();
                 }
-                return e;
             }
+            return e;
         }
 
         public void Update(Equipa entity)
@@ -79,11 +81,13 @@ namespace DataLayer.QueryObjects
         public Equipa getFreeTeam(string competencia)
         {
             int equipaId = 0;
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     cmd.CommandText = $"SELECT dbo.F_ObterEquipaLivre('{competencia}')";
                     using (SqlDataReader rd = cmd.ExecuteReader())
                     {
@@ -100,11 +104,10 @@ namespace DataLayer.QueryObjects
 
         public void CreateWithSP(Equipa entity)
         {
-
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
                     cmd.CommandText = insertEquipaText;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;

@@ -41,11 +41,12 @@ namespace DataLayer.QueryObjects
 
         public void insertOrDeleteEquipaFunc(EquipaFunc entity, string option)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     cmd.CommandText = insertorDeleteEquipaFuncText;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter i1 = new SqlParameter("@equipaId", entity.equipaId);

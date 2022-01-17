@@ -127,7 +127,7 @@ namespace BusinessLayer
                     EquipaIntervencao equipaIntervecao = new EquipaIntervencao { equipaId = equipa.Id, idIntervencao = intervencao.id };
                     equipaIntervencaoMapper.Update(equipaIntervecao);
                     ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
-                    ts.Complete();
+                    ts.Dispose();
                 }
             }
         }

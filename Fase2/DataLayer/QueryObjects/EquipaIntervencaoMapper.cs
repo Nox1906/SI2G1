@@ -39,11 +39,12 @@ namespace DataLayer.QueryObjects
 
         public void Delete(int id)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     if (session.BeginTran())
                     {
                         cmd.CommandText = deleteEquipaIntervencaoText;
@@ -62,11 +63,12 @@ namespace DataLayer.QueryObjects
 
         public void Update(EquipaIntervencao entity)
         {
-            using (SqlCommand cmd = session.CreateCommand())
+            openTransactionScope();
+            using (ts)
             {
-                openTransactionScope();
-                using (ts)
+                using (SqlCommand cmd = session.CreateCommand())
                 {
+
                     if (session.BeginTran())
                     {
                         cmd.CommandText = updateEquipaText;
