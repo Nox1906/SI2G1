@@ -21,8 +21,9 @@ namespace EntityFrameworkModel
         public Nullable<System.DateTime> dtFim { get; set; }
         public Nullable<decimal> valor { get; set; }
         public int ativoId { get; set; }
+    
         public virtual Ativo Ativo { get; set; }
-        public EquipaIntervencao EquipaIntervencao { get; set; }
-        public IntervencaoPeriodica IntervencaoPeriodica { get; set; }
+        public virtual EquipaIntervencao EquipaIntervencao { get; set; }
+        public virtual IntervencaoPeriodica IntervencaoPeriodica { get; set; }
     }
 }

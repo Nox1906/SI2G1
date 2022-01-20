@@ -5,7 +5,6 @@ namespace Model
 {
     public class Equipa
     {
-
         public Equipa()
         {
             EquipaIntervencaos = new List<EquipaIntervencao>();
@@ -17,12 +16,9 @@ namespace Model
         public List<EquipaIntervencao> EquipaIntervencaos { get; set; }
         public List<EquipaFunc> EquipaFuncs { get; set; }
 
-
         public override string ToString()
         {
             return $"Equipa -> Id: {Id} ; Localizacao: {Localizacao} ; NFunc: {NFunc}";
         }
-
-       
     }
 }

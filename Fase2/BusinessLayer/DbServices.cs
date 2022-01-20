@@ -25,7 +25,6 @@ namespace BusinessLayer
                 servicesContext = new EntityFrameworkServices();
         }
 
-
         public void openTransactionScope()
         {
             ts = new TransactionScope(TransactionScopeOption.Required, options);
