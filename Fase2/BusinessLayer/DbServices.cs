@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Transactions;
 using Model;
 
 namespace BusinessLayer
@@ -9,40 +10,62 @@ namespace BusinessLayer
     public class DbServices
     {
         IServices servicesContext;
+        TransactionOptions options;
+        protected TransactionScope ts;
         public DbServices(bool fm)
         {
+            options = new TransactionOptions()
+            {
+                IsolationLevel = IsolationLevel.ReadCommitted,
+                Timeout = TimeSpan.FromMinutes(2)
+            };
             if (fm)
                 servicesContext = new ADONetServices();
             else
                 servicesContext = new EntityFrameworkServices();
         }
 
+
+        public void openTransactionScope()
+        {
+            ts = new TransactionScope(TransactionScopeOption.Required, options);
+        }
+
         public void getEquipaLivre()
         {
             Console.WriteLine("Inserir competencia : ");
             string competencia = Console.ReadLine();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                Equipa eq = servicesContext.getEquipaLivre(competencia);
-                Console.WriteLine(eq.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Não há equipas disponiveis");
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    Equipa eq = servicesContext.getEquipaLivre(competencia);
+                    Console.WriteLine(eq.ToString());
+                    ts.Complete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Não existem equipas disponiveis");
+                }
             }
         }
         public void insertIntervencaoWithProcedure()
         {
-            try
+            openTransactionScope();
+            using (ts)
             {
-                Intervencao intervencao = insertIntervencaoValues();
-                servicesContext.insertIntervencaoWithProcedure(intervencao);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    Intervencao intervencao = insertIntervencaoValues();
+                    servicesContext.insertIntervencaoWithProcedure(intervencao);
+                    Console.WriteLine("Intervenção inserida com sucesso \n");
+                    ts.Complete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
             }
         }
 
@@ -56,14 +79,19 @@ namespace BusinessLayer
             equipa.Id = id;
             Console.WriteLine("Inserir localização");
             equipa.Localizacao = Console.ReadLine();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                servicesContext.insertEquipa(equipa);
-                Console.WriteLine("Equipa inserida com sucesso \n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    servicesContext.insertEquipa(equipa);
+                    Console.WriteLine("Equipa inserida com sucesso \n");
+                    ts.Complete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
             }
         }
 
@@ -92,20 +120,26 @@ namespace BusinessLayer
             Console.WriteLine("Inserir id da Equipa");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            equipaFunc.equipaId = id;
+            equipaFunc.Equipa = new Equipa { Id = id };
 
             Console.WriteLine("Inserir id do Supervisor");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Valor tem de ser inteiro\n");
             equipaFunc.supervisor = id;
-            try
+
+            openTransactionScope();
+            using (ts)
             {
-                servicesContext.insertOrDeleteEquipaFunc(equipaFunc, option);
-                Console.WriteLine("Operação realizada com sucesso \n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    servicesContext.insertOrDeleteEquipaFunc(equipaFunc, option);
+                    ts.Complete();
+                    Console.WriteLine("Operação realizada com sucesso \n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
             }
         }
 
@@ -115,50 +149,65 @@ namespace BusinessLayer
             int ano;
             while (!Int32.TryParse(Console.ReadLine(), out ano))
                 Console.WriteLine("Valor tem de ser inteiro entre 1990 e 2100\n");
-            try
+            openTransactionScope();
+            using (ts)
             {
-                List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
-                foreach (Intervencao i in intervencoes)
+                try
                 {
-                    Console.WriteLine($"id: {i.id} ; descrição: {i.descricao}");
+                    List<Intervencao> intervencoes = servicesContext.getIntervencoesAno(ano);
+                    foreach (Intervencao i in intervencoes)
+                    {
+                        Console.WriteLine($"id: {i.id} ; descrição: {i.descricao}");
+                    }
+                    intervencoes.Clear();
+                    ts.Complete();
                 }
-                intervencoes.Clear();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
-                Console.WriteLine("Não existem intervenções nesse ano");
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                    Console.WriteLine("Não existem intervenções nesse ano");
+                }
             }
         }
 
         public void insertIntervencao()
         {
             Intervencao intervencao = insertIntervencaoValues();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                servicesContext.insertIntervencao(intervencao);
-                Console.WriteLine("Intervenção inserida com sucesso \n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    servicesContext.insertIntervencao(intervencao);
+                    Console.WriteLine("Intervenção inserida com sucesso \n");
+                    ts.Complete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
             }
         }
         public void insertEquipaIntervencao()
         {
             Intervencao intervencao = insertIntervencaoValues();
-            try
+            openTransactionScope();
+            using (ts)
             {
-                Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
-                Console.WriteLine($"Equipa que será atribuída à intervençao: \n {equipa} ");
-                servicesContext.insertIntervencaoWithProcedure(intervencao);
-                intervencao.estado = insertEstado();
-                servicesContext.insertEquipaIntervencao(intervencao, equipa);
-                Console.WriteLine("Equipa com id = " + equipa.Id + " atribuida à intervenção com id = " + intervencao.id + "\n");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.GetBaseException().Message);
+                try
+                {
+                    servicesContext.insertIntervencaoWithProcedure(intervencao);
+                    Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
+                    Console.WriteLine($"Equipa que será atribuída à intervençao: \n {equipa} ");
+                    intervencao.estado = insertEstado();
+                    servicesContext.insertEquipaIntervencao(intervencao, equipa);
+                    Console.WriteLine("Equipa com id = " + equipa.Id + " atribuida à intervenção com id = " + intervencao.id + "\n");
+                    ts.Complete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
             }
         }
 
@@ -167,23 +216,39 @@ namespace BusinessLayer
             Intervencao intervencao = new Intervencao
             {
                 id = 1234,
-                descricao = "avaria",
-                estado = "em análise",
+                descricao = "inspecção",
+                estado = "por atribuir",
                 dtInicio = DateTime.Parse("28-10-2021"),
                 dtFim = DateTime.Parse("02-12-2021"),
                 valor = 50,
-                ativoId = 1,
+                Ativo = new Ativo { id = 3 },
                 meses = 2
             };
             string tipo;
             if (servicesContext is ADONetServices) tipo = "ADONetServices"; else tipo = "EFServices";
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            for (int i = 0; i < 100; i++)
+            openTransactionScope();
+            try
             {
-                servicesContext.insertIntervencao(intervencao);
-                Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
-                servicesContext.insertEquipaIntervencao(intervencao, equipa);
+                using (ts)
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+                        servicesContext.insertIntervencao(intervencao);
+                        Equipa equipa = servicesContext.getEquipaLivre(intervencao.descricao);
+                        servicesContext.insertEquipaIntervencao(intervencao, equipa);
+                        servicesContext.clearTest(intervencao.id);
+                    }
+                    ts.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetBaseException().Message);
+            }
+            finally
+            {
                 servicesContext.clearTest(intervencao.id);
             }
             sw.Stop();
@@ -207,18 +272,22 @@ namespace BusinessLayer
             Console.WriteLine("Inserir id da competencia do segundo funcionario");
             while (!Int32.TryParse(Console.ReadLine(), out idComptFunc2))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            try
+            openTransactionScope();
+            using (ts)
             {
-                servicesContext.changeCompetenciaFunc(idFunc1, idFunc2, idComptFunc1, idComptFunc2);
-                Console.WriteLine("Competencias trocadas com sucesso entre funcionario " + idFunc1 + " e " + idFunc2);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                try
+                {
+                    servicesContext.changeCompetenciaFunc(idFunc1, idFunc2, idComptFunc1, idComptFunc2);
+                    Console.WriteLine("Competencias trocadas com sucesso entre funcionario " + idFunc1 + " e " + idFunc2);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
         }
 
-        public Intervencao insertIntervencaoValues()
+        private Intervencao insertIntervencaoValues()
         {
             Intervencao intervencao = new Intervencao();
             Console.WriteLine("Inserir id da Intervencao");
@@ -267,7 +336,7 @@ namespace BusinessLayer
             Console.WriteLine("Inserir Ativo da Intervencao");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Valor tem de ser inteiro\n");
-            intervencao.ativoId = id;
+            intervencao.Ativo = new Ativo { id = id };
             Console.WriteLine("Inserir meses da Intervencao");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Valor tem de ser inteiro\n");

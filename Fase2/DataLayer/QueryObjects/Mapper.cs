@@ -8,8 +8,7 @@ using System.Transactions;
 
 namespace DataLayer.QueryObjects
 {
-    public abstract class Mapper
-    {
+    public abstract class Mapper<T,Tid> : IMapper<T, Tid> { 
         protected ISession session;
         TransactionOptions options;
         protected TransactionScope ts;
@@ -30,5 +29,16 @@ namespace DataLayer.QueryObjects
         {
             ts = new TransactionScope(TransactionScopeOption.Required, options);
         }
+
+        public abstract void Create(T entity);
+
+        public abstract T ReadById(Tid id);
+
+        public abstract void Update(T entity);
+
+        public abstract void CreateWithSP(T entity);
+
+        public abstract void Delete(T id);
+
     }
 }

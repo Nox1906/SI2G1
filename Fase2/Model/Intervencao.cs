@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Intervencao
+    public class Intervencao 
     {
         public int id { get; set; }
         public string descricao { get; set; }
@@ -14,13 +14,16 @@ namespace Model
         public DateTime dtInicio { get; set; }
         public DateTime dtFim { get; set; }
         public decimal valor { get; set; }
-        public int ativoId { get; set; }
+        public Ativo Ativo { get; set; }
+
         public int meses { get; set; }
+        public EquipaIntervencao EquipaIntervencao { get; set; }
+        public IntervencaoPeriodica IntervencaoPeriodica{ get; set; }
 
         public override string ToString()
         {
             return $"Intervencao -> id: {id} ; descricao: {descricao} ; estado: {estado} ; " +
-                $"dtInicio: {dtInicio} ; dtFim: {dtFim} ; valor: {valor} ; activoId: {ativoId} " +
+                $"dtInicio: {dtInicio} ; dtFim: {dtFim} ; valor: {valor} ; activoId: {Ativo.id} " +
                 $"; meses: {meses}";
         }
 

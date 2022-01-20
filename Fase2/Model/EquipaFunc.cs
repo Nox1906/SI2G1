@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class EquipaFunc
+    public class EquipaFunc 
     {
         public int funcId { get; set; }
-        public Nullable<int> equipaId { get; set; }
+
+        public Equipa Equipa { get; set; }
         public Nullable<int> supervisor { get; set; }
+
+        
     }
 }

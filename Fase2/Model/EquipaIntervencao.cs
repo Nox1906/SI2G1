@@ -8,12 +8,12 @@ namespace Model
 {
     public class EquipaIntervencao
     {
-        public int idIntervencao { get; set; }
-        public Nullable<int> equipaId { get; set; }
+        public Equipa Equipa { get; set; }
+        public Intervencao Intervencao { get; set; }
 
         public override string ToString()
         {
-            return $"EquipaIntervencao -> idIntervencao: {idIntervencao} ; equipaId: {equipaId} ";
+            return $"EquipaIntervencao -> idIntervencao: {Intervencao.id} ; equipaId: {Equipa.Id} ";
         }
     }
 }

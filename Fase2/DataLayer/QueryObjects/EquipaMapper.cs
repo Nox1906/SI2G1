@@ -10,7 +10,7 @@ using System.Transactions;
 
 namespace DataLayer.QueryObjects
 {
-    public class EquipaMapper : Mapper, IMapper<Equipa, int>
+    public class EquipaMapper : Mapper<Equipa, int>
     {
         public EquipaMapper(ISession s) : base(s)
         {
@@ -31,18 +31,18 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public void Create(Equipa entity)
+        public override void Create(Equipa entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public override void Delete(Equipa entity)
         {
             throw new NotImplementedException();
         }
 
 
-        public Equipa ReadById(int id)
+        public override Equipa ReadById(int id)
         {
             Equipa e = new Equipa();
             openTransactionScope();
@@ -50,8 +50,6 @@ namespace DataLayer.QueryObjects
             {
                 using (SqlCommand cmd = session.CreateCommand())
                 {
-
-
                     if (session.BeginTran())
                     {
                         cmd.CommandText = GetEquipaText;
@@ -67,13 +65,15 @@ namespace DataLayer.QueryObjects
                             }
                         }
                     }
-                    ts.Complete();
                 }
+                IMapper<EquipaIntervencao, int> equipaIntervencaos = new EquipaIntervencaoMapper(session);
+                e.EquipaIntervencaos = ((EquipaIntervencaoMapper)equipaIntervencaos).ReadAllEquipas(id);
+                ts.Complete();
             }
             return e;
         }
 
-        public void Update(Equipa entity)
+        public override void Update(Equipa entity)
         {
             throw new NotImplementedException();
         }
@@ -84,7 +84,6 @@ namespace DataLayer.QueryObjects
             openTransactionScope();
             using (ts)
             {
-
                 using (SqlCommand cmd = session.CreateCommand())
                 {
 
@@ -102,7 +101,7 @@ namespace DataLayer.QueryObjects
             return equipaId == 0 ? null : ReadById(equipaId);
         }
 
-        public void CreateWithSP(Equipa entity)
+        public override void CreateWithSP(Equipa entity)
         {
             openTransactionScope();
             using (ts)
@@ -120,5 +119,6 @@ namespace DataLayer.QueryObjects
                 }
             }
         }
+
     }
 }

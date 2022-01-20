@@ -3,11 +3,10 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Transactions;
 
 namespace DataLayer.QueryObjects
 {
-    public class IntervencaoMapper : Mapper, IMapper<Intervencao, int>
+    public class IntervencaoMapper : Mapper<Intervencao, int>
     {
         public IntervencaoMapper(ISession s) : base(s)
         {
@@ -63,7 +62,7 @@ namespace DataLayer.QueryObjects
                 return "SELECT * from dbo.IntervencaoAno(@year)";
             }
         }
-        public void Create(Intervencao entity)
+        public override void Create(Intervencao entity)
         {
             openTransactionScope();
             using (ts)
@@ -80,15 +79,13 @@ namespace DataLayer.QueryObjects
                         cmd.Parameters.AddWithValue("@dtInicio", entity.dtInicio);
                         cmd.Parameters.AddWithValue("@dtFim", entity.dtFim);
                         cmd.Parameters.AddWithValue("@valor", entity.valor);
-                        cmd.Parameters.AddWithValue("@ativoId", entity.ativoId);
+                        cmd.Parameters.AddWithValue("@ativoId", entity.Ativo.id);
                         cmd.ExecuteNonQuery();
                         if (entity.meses > 0)
                         {
-                            cmd.Parameters.Clear();
-                            cmd.CommandText = InsertIntervencaoPeriodicaText;
-                            cmd.Parameters.AddWithValue("@id", entity.id);
-                            cmd.Parameters.AddWithValue("@meses", entity.meses);
-                            cmd.ExecuteNonQuery();
+                            IntervencaoPeriodicaMapper intervencaoPeriodicaMapper = new IntervencaoPeriodicaMapper(session);
+                            IntervencaoPeriodica intervencaoPeriodica = new IntervencaoPeriodica { Intervencao = entity };
+                            intervencaoPeriodicaMapper.Create(intervencaoPeriodica);
                         }
                     }
                     ts.Complete();
@@ -96,12 +93,12 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public void Delete(int id)
+        public override void Delete(Intervencao entity)
         {
             throw new NotImplementedException();
         }
 
-        public Intervencao ReadById(int id)
+        public override Intervencao ReadById(int id)
         {
             Intervencao i = new Intervencao();
             openTransactionScope();
@@ -124,18 +121,19 @@ namespace DataLayer.QueryObjects
                                 i.dtInicio = rd.GetDateTime(3);
                                 i.dtFim = rd.GetDateTime(4);
                                 i.valor = rd.GetDecimal(5);
-                                i.ativoId = rd.GetInt32(6);
-                                i.meses = rd.GetInt32(7);
+                                i.Ativo = new Ativo { id = rd.GetInt32(6) };
+                                i.meses = 0;
                             }
                         }
                     }
-                    ts.Complete();
                 }
-                return i;
+
+                ts.Complete();
             }
+            return i;
         }
 
-        public void Update(Intervencao entity)
+        public override void Update(Intervencao entity)
         {
             throw new NotImplementedException();
         }
@@ -160,7 +158,7 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public void CreateWithSP(Intervencao entity)
+        public override void CreateWithSP(Intervencao entity)
         {
             openTransactionScope();
             using (ts)
@@ -175,7 +173,7 @@ namespace DataLayer.QueryObjects
                     SqlParameter i3 = new SqlParameter("@dtInicio", entity.dtInicio);
                     SqlParameter i4 = new SqlParameter("@dtFim", entity.dtFim);
                     SqlParameter i5 = new SqlParameter("@valor", entity.valor);
-                    SqlParameter i6 = new SqlParameter("@ativoId", entity.ativoId);
+                    SqlParameter i6 = new SqlParameter("@ativoId", entity.Ativo.id);
                     SqlParameter i7 = new SqlParameter("@meses", entity.meses);
                     i3.SqlDbType = System.Data.SqlDbType.Date;
                     i4.SqlDbType = System.Data.SqlDbType.Date;

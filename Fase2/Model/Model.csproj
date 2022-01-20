@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ativo.cs" />
+    <Compile Include="IntervencaoPeriodica.cs" />
     <Compile Include="Equipa.cs" />
     <Compile Include="EquipaFunc.cs" />
     <Compile Include="EquipaIntervencao.cs" />

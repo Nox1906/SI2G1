@@ -39,7 +39,8 @@ namespace EntityFrameworkModel
                     r = ctx.Database.SqlQuery<int>(sqlQuery, parameters).FirstOrDefault();
                     e = (from i in ctx.Equipas
                          where i.id == r
-                         select i).SingleOrDefault();
+                         select i)
+                         .SingleOrDefault();
                 }
                 ts.Complete();
             }
@@ -52,7 +53,7 @@ namespace EntityFrameworkModel
             {
                 using (ctx = new L51NG1Entities())
                 {
-                    ctx.SP_criaInter(i.id, i.descricao, i.dtInicio, i.dtFim, i.valor, i.ativoId, i.meses);
+                    ctx.SP_criaInter(i.id, i.descricao, i.dtInicio, i.dtFim, i.valor, i.Ativo.id, i.meses);
                     ctx.SaveChanges();
                 }
                 ts.Complete();
@@ -90,7 +91,7 @@ namespace EntityFrameworkModel
             {
                 using (ctx = new L51NG1Entities())
                 {
-                    ctx.SP_ActualizarElementosEquipa(equipaFunc.equipaId, equipaFunc.funcId, option, equipaFunc.supervisor);
+                    ctx.SP_ActualizarElementosEquipa(equipaFunc.Equipa.Id, equipaFunc.funcId, option, equipaFunc.supervisor);
                 }
                 ts.Complete();
             }
@@ -112,7 +113,7 @@ namespace EntityFrameworkModel
                         dtInicio = i.dtInicio,
                         dtFim = i.dtFim,
                         valor = i.valor,
-                        ativoId = i.ativoId,
+                        ativoId = i.Ativo.id,
                     });
                     if (i.meses > 0)
                     {

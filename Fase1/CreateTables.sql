@@ -119,7 +119,7 @@ CREATE TABLE dbo.HistAlteracaoEqInterv (
 	equipaId int, 
 	dtAtualizacao DATETIME, 
 	PRIMARY KEY (idIntervencao,dtAtualizacao),
-	FOREIGN KEY (idIntervencao) REFERENCES Intervencao(id),
+	FOREIGN KEY (idIntervencao) REFERENCES EquipaIntervencao(idIntervencao),
 );
 
 COMMIT TRANSACTION
@@ -188,7 +188,7 @@ GO
 --Elimina da tabela equipa Intervençao e 
 CREATE OR ALTER TRIGGER [dbo].[trg_DeleteEquipaIntervencao] 
 ON [dbo].[EquipaIntervencao]
-FOR DELETE
+instead of DELETE
 AS 
 BEGIN
 			DECLARE @Intervencao int, 
@@ -197,6 +197,7 @@ BEGIN
 			SELECT @Intervencao = idIntervencao , @Equipa = equipaId FROM deleted
 		
 		DELETE FROM dbo.HistAlteracaoEqInterv where @Intervencao = idIntervencao
+		DELETE FROM dbo.EquipaIntervencao where @Intervencao = idIntervencao
 		DELETE FROM dbo.IntervencaoPeriodica where @Intervencao = id
 		DELETE FROM dbo.Intervencao where @Intervencao = id
 END

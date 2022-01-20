@@ -23,7 +23,8 @@ INSERT INTO FunCompet VALUES (2,2)
 INSERT INTO FunCompet VALUES (3,3)
 INSERT INTO FunCompet VALUES (4,2)
 INSERT INTO FunCompet VALUES (5,2)
-INSERT INTO FunCompet VALUES (6,2)
+INSERT INTO FunCompet VALUES (6,3)
+INSERT INTO FunCompet VALUES (7,3)
 
 INSERT INTO Tipos values (1, 'Eletrodomestico')
 INSERT INTO Tipos values (2, 'Eletronica')
@@ -35,7 +36,7 @@ INSERT INTO Ativos values (4,'Tubo refrigerador',10,'03-12-2021',1,'BOSS','2.0',
 
 
 INSERT INTO Intervencao Values (1,'rutura','em análise','30-10-2021', '03-12-2021',50,1)
-INSERT INTO Intervencao Values (2,'avaria','em análise','30-10-2021','01-11-2021',5,2)
+INSERT INTO Intervencao Values (2,'inspecção','em análise','30-10-2021','01-11-2021',5,2)
 INSERT INTO Intervencao Values (3,'avaria','em análise','01-10-2022','01-11-2022',5,3)
 
 
@@ -43,6 +44,11 @@ INSERT INTO Equipa VALUES (1, 'Lisboa',0)
 INSERT INTO Equipa VALUES (2, 'Porto', 0)
 INSERT INTO Equipa VALUES (3, 'Porto', 0)
 INSERT INTO Equipa VALUES (4, 'Faro', 0)
+INSERT INTO Equipa VALUES (99, 'Teste', 0)
+
+EXEC dbo.SP_ActualizarElementosEquipa 99,8,'insert', 7
+EXEC dbo.SP_ActualizarElementosEquipa 99,7,'insert', 7
+EXEC dbo.SP_ActualizarElementosEquipa 99,6,'insert', 7
 
 COMMIT
 

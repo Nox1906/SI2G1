@@ -60,25 +60,20 @@ AS
 BEGIN
 	declare @equipa int
 
-		;with cte as (
-		SELECT TOP 1 e.equipaId AS EQ, COUNT(e.idIntervencao) as nIntervencoes, maxData	
-		FROM EquipaIntervencao E
-			INNER JOIN Intervencao I ON I.id = E.idIntervencao
-			inner join (SELECT equipaId as eq, max(dtAtualizacao) as maxData 
-						FROM HistAlteracaoEqInterv 
-						group by equipaId) h on h.eq = E.equipaId
-		where e.equipaId is not NULL AND I.estado != 'em execução' 
-				and E.equipaId IN (	SELECT distinct equipaId
-									FROM dbo.EquipaFunc e 
-										JOIN dbo.FunCompet f ON e.funcId = f.idFunc 
-										JOIN dbo.Competencias c ON c.id = f.idComp
-										WHERE c.descricao like @competencia and e.equipaId is not null)
-		group by e.equipaId,maxData	
-		HAVING COUNT(e.idIntervencao) < 3
-		ORDER BY maxData ASC
-
-		)
-		SELECT @equipa = cte.EQ FROM cte
+		SELECT top (1) @equipa = ef.equipaId from dbo.FunCompet fc
+	inner join dbo.Competencias c on c.descricao = @competencia and fc.idComp = c.id
+	left join dbo.EquipaFunc ef on ef.funcId = fc.idFunc
+	LEFT JOIN EquipaIntervencao ei on ei.equipaId = ef.equipaId
+	left join HistAlteracaoEqInterv ha on ha.equipaId = ei.equipaId
+	left JOIN (	select equipaId, count(idIntervencao) as contagemIntevencoes
+					from EquipaIntervencao 
+					LEFT JOIN Intervencao i ON I.id = EquipaIntervencao.idIntervencao
+					WHERE equipaId is not null and equipaId not in 	(select ei.equipaId from EquipaIntervencao ei
+														inner join Intervencao i on i.id = ei.idIntervencao 
+														and estado = 'em execução')	GROUP BY equipaId
+														having count(idIntervencao) < 3
+) sub on sub.equipaId = ei.equipaId
+order by ISNULL(ha.dtAtualizacao,0)
 RETURN @equipa
 end
 
@@ -164,6 +159,7 @@ ELSE
 				else 
 					begin
 						UPDATE dbo.EquipaFunc SET equipaId = nuLL, supervisor = NULL WHERE funcId = @FuncId
+						UPDATE dbo.EquipaFunc SET equipaId = nuLL WHERE funcId = @supervisor 
 						UPDATE dbo.EquipaFunc SET supervisor = NULL WHERE supervisor = @supervisor 
 					end
 			END
@@ -176,7 +172,11 @@ END
 -- Description:	i) Criar uma função para produzir a listagem (código, descrição) das intervencões de um determinado ano;
 -- =============================================
 go
-CREATE OR ALTER FUNCTION dbo.IntervencaoAno (@year int)RETURNS TABLEASRETURN (SELECT i.id, i.descricao FROM dbo.Intervencao i		WHERE YEAR(i.dtInicio) = @year AND YEAR(i.dtFim) = @year)
+CREATE OR ALTER FUNCTION dbo.IntervencaoAno (@year int)
+RETURNS TABLE
+AS
+RETURN (SELECT i.id, i.descricao FROM dbo.Intervencao i
+		WHERE YEAR(i.dtInicio) = @year AND YEAR(i.dtFim) = @year)
 
 -- =============================================
 -- Description:	j) Actualizar o estado de uma intervencao;
@@ -207,7 +207,9 @@ GO
 --, que possibilite a altera¸c˜ao do estado de uma ou mais interven¸c˜oes;;
 -- ============================================
 
-CREATE or alter VIEW dbo.TV_ResumoIntervencoes  AS  (SELECT	i.id AS IdIntervencao
+CREATE or alter VIEW dbo.TV_ResumoIntervencoes  
+AS  (
+SELECT	i.id AS IdIntervencao
 		,i.descricao as descIntervencao
 		,i.estado as estadoIntervencao
 		,i.dtInicio as dtInIntervencao

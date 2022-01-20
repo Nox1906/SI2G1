@@ -1,11 +1,12 @@
 ﻿using DataLayer.DataMappers;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace DataLayer.QueryObjects
 {
-    public class EquipaFuncMapper : Mapper, IMapper<EquipaFunc, int>
+    public class EquipaFuncMapper : Mapper<EquipaFunc, int>
     {
         public EquipaFuncMapper(ISession s) : base(s)
         {
@@ -19,22 +20,22 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public void Create(EquipaFunc entity)
+        public override void Create(EquipaFunc entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public override void Delete(EquipaFunc id)
         {
             throw new NotImplementedException();
         }
 
-        public EquipaFunc ReadById(int id)
+        public override EquipaFunc ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(EquipaFunc entity)
+        public override void Update(EquipaFunc entity)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +50,7 @@ namespace DataLayer.QueryObjects
 
                     cmd.CommandText = insertorDeleteEquipaFuncText;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    SqlParameter i1 = new SqlParameter("@equipaId", entity.equipaId);
+                    SqlParameter i1 = new SqlParameter("@equipaId", entity.Equipa.Id);
                     SqlParameter i2 = new SqlParameter("@FuncId", entity.funcId);
                     SqlParameter i3 = new SqlParameter("@operationType", option);
                     SqlParameter i4 = new SqlParameter("@supervisor", entity.supervisor);
@@ -57,14 +58,16 @@ namespace DataLayer.QueryObjects
                     cmd.Parameters.Add(i2);
                     cmd.Parameters.Add(i3);
                     cmd.Parameters.Add(i4);
+                    cmd.ExecuteNonQuery();
                     ts.Complete();
                 }
             }
         }
 
-        public void CreateWithSP(EquipaFunc entity)
+        public override void CreateWithSP(EquipaFunc entity)
         {
             throw new NotImplementedException();
         }
+
     }
 }

@@ -10,37 +10,21 @@ namespace BusinessLayer
     public class ADONetServices : IServices
     {
 
-        Session session;
-        TransactionOptions options;
-        TransactionScope ts;
+        ISession session;
 
         public ADONetServices()
         {
             this.session = new Session();
-            options = new TransactionOptions()
-            {
-                IsolationLevel = IsolationLevel.ReadCommitted,
-                Timeout = TimeSpan.FromMinutes(2)
-            };
         }
 
-        public void openTransactionScope()
-        {
-            ts = new TransactionScope(TransactionScopeOption.Required, options);
-        }
         public Equipa getEquipaLivre(string competencia)
         {
             Equipa resultado;
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
-                    resultado = ((EquipaMapper)equipaMapper).getFreeTeam(competencia);
-                    ts.Complete();
-                    return resultado;
-                }
+                IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
+                resultado = ((EquipaMapper)equipaMapper).getFreeTeam(competencia);
+                return resultado;
             }
         }
 
@@ -49,26 +33,18 @@ namespace BusinessLayer
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-                    intervencaoMapper.CreateWithSP(intervencao);
-                    ts.Complete();
-                }
+
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                intervencaoMapper.CreateWithSP(intervencao);
             }
         }
         public void insertEquipa(Equipa equipa)
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
-                    equipaMapper.CreateWithSP(equipa);
-                    ts.Complete();
-                }
+
+                IMapper<Equipa, int> equipaMapper = new EquipaMapper(session);
+                equipaMapper.CreateWithSP(equipa);
             }
         }
 
@@ -76,13 +52,8 @@ namespace BusinessLayer
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
-                    ((EquipaFuncMapper)equipaFuncMapper).insertOrDeleteEquipaFunc(equipaFunc, option);
-                    ts.Complete();
-                }
+                IMapper<EquipaFunc, int> equipaFuncMapper = new EquipaFuncMapper(session);
+                ((EquipaFuncMapper)equipaFuncMapper).insertOrDeleteEquipaFunc(equipaFunc, option);
             }
         }
 
@@ -91,13 +62,8 @@ namespace BusinessLayer
             List<Intervencao> intervencoes;
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-                    intervencoes = ((IntervencaoMapper)intervencaoMapper).getIntervencoesAno(ano);
-                    ts.Complete();
-                }
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                intervencoes = ((IntervencaoMapper)intervencaoMapper).getIntervencoesAno(ano);
             }
             return intervencoes;
         }
@@ -106,55 +72,40 @@ namespace BusinessLayer
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-                    intervencaoMapper.Create(intervencao);
-                    ts.Complete();
-                }
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                intervencaoMapper.Create(intervencao);
             }
         }
         public void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa)
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
+                EquipaIntervencao equipaIntervecao = new EquipaIntervencao
                 {
-                    IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
-                    IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
-                    EquipaIntervencao equipaIntervecao = new EquipaIntervencao { equipaId = equipa.Id, idIntervencao = intervencao.id };
-                    equipaIntervencaoMapper.Update(equipaIntervecao);
-                    ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
-                    ts.Dispose();
-                }
+                    Equipa = equipa,
+                    Intervencao = intervencao
+                };
+                equipaIntervencaoMapper.Update(equipaIntervecao);
+                ((IntervencaoMapper)intervencaoMapper).UpdateState(intervencao);
             }
         }
 
         public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
-            using (session)
-            {
-                openTransactionScope();
-                using (ts)
-                {
-                    ts.Complete();
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public void clearTest(int id)
         {
             using (session)
             {
-                openTransactionScope();
-                using (ts)
-                {
-                    IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
-                    equipaIntervencaoMapper.Delete(id);
-                    ts.Complete();
-                }
+
+                EquipaIntervencao equipa = new EquipaIntervencao { Intervencao = new Intervencao { id = id } };
+                IMapper<EquipaIntervencao, int> equipaIntervencaoMapper = new EquipaIntervencaoMapper(session);
+                equipaIntervencaoMapper.Delete(equipa);
+
             }
         }
     }

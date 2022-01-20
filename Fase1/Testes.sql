@@ -58,29 +58,13 @@ BEGIN
 				UPDATE EquipaIntervencao SET equipaId = 2 WHERE idIntervencao = 1
 		DECLARE @equipaLivre int
 		SELECT @equipaLivre = dbo.F_ObterEquipaLivre('avaria')
-		if (@equipaLivre = 1)
+		if (@equipaLivre = 3)
 			PRINT ('Equipa 1 está livre OK')
 		ELSE 
 			PRINT ('Equipa 1 está livre NOK')
 	ROLLBACK
 end
-go
-BEGIN 
-	PRINT('TESTES ALINEA E - Obter equipa livre')
-	BEGIN TRAN
-				EXEC dbo.SP_ActualizarElementosEquipa 1,2,'insert', 3
-				EXEC dbo.SP_ActualizarElementosEquipa 2,1,'insert', 4
-				EXEC dbo.SP_ActualizarElementosEquipa 3,5,'insert', 6
-				UPDATE EquipaIntervencao SET equipaId = 1 WHERE idIntervencao = 2
-				UPDATE EquipaIntervencao SET equipaId = 2 WHERE idIntervencao = 1
-		DECLARE @equipaLivre int
-		SELECT @equipaLivre = dbo.F_ObterEquipaLivre('inspeção')
-		if (@equipaLivre IS NULL)
-			PRINT ('Equipa nao encontrada OK')
-		ELSE 
-			PRINT ('Equipa nao encontrada NOK')
-	ROLLBACK
-end
+
 
 -- =============================================
 -- Description:	TESTES f ) Criar o procedimento p criaInter que permite criar uma interven¸c˜ao;
@@ -234,10 +218,10 @@ BEGIN
 			UPDATE TV_ResumoIntervencoes SET estadoIntervencao = 'em execução'
 			DECLARE @Interv int
 			select @Interv = count(estado) from dbo.Intervencao WHERE estado = 'em execução'
-			if (@Interv = 3)
-				print ('atualizados 3 intervencoes para em Execução - Ok')
+			if (@Interv = 4)
+				print ('atualizados 4 intervencoes para em Execução - Ok')
 			else
-				print ('atualizados 3 intervencoes para em Execução - NOK')
+				print ('atualizados 4 intervencoes para em Execução - NOK')
 		ROLLBACK	
 end
 
@@ -248,7 +232,7 @@ BEGIN
 			UPDATE TV_ResumoIntervencoes SET descIntervencao = 'rutura'
 			DECLARE @Interv int
 			select @Interv = count(descricao) from dbo.Intervencao WHERE descricao = 'rutura'
-			if (@Interv = 3)
+			if (@Interv = 4)
 				print ('falha a atualiza um campo diferente de estado - NOK')
 			else
 				print ('falha a atualiza um campo diferente de estado - OK')

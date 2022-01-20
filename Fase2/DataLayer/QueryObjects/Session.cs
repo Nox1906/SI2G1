@@ -13,7 +13,8 @@ namespace DataLayer.QueryObjects
 
         public Session()
         {
-            connection = ConfigurationManager.ConnectionStrings["L51NG1"].ConnectionString; ;
+            connection = ConfigurationManager.ConnectionStrings["L51NG1"].ConnectionString;
+
 
         }
 
