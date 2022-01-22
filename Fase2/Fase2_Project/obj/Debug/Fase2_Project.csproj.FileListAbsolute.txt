@@ -43,3 +43,5 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\EntityFrameworkM
 C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\obj\Debug\Fase2_Project.csproj.SuggestedBindingRedirects.cache
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\ModelInterfaces.dll
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\Fase2_Project\bin\Debug\ModelInterfaces.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\ModelInterfaces.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\Fase2_Project\bin\Debug\ModelInterfaces.pdb

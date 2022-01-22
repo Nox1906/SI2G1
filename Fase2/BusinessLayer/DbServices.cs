@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Linq;
 using System.Transactions;
 using Model;
 
@@ -300,7 +300,9 @@ namespace BusinessLayer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.GetBaseException().Message);
+                    Console.WriteLine(e.InnerException.GetType());
+
                 }
             }
         }

@@ -28,3 +28,5 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFra
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkModel\obj\Debug\EntityFrameworkModel.pdb
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\ModelInterfaces.dll
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\ModelInterfaces.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\ModelInterfaces.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\EntityFrameworkModel\bin\Debug\ModelInterfaces.pdb

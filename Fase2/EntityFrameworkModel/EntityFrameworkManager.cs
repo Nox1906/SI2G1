@@ -144,31 +144,33 @@ namespace EntityFrameworkModel
         public void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2)
         {
             openTransactionScope();
+            ctx = new L51NG1Entities();
+            L51NG1Entities ctx2 = new L51NG1Entities();
             using (ts)
             {
-                using (L51NG1Entities ctx1 = new L51NG1Entities())
-                {
 
-                    var funcionario1 = ctx.Funcionarios.Where(f => f.id == idFunc1).FirstOrDefault();
-                    var funcionario2 = ctx.Funcionarios.Where(f => f.id == idFunc2).FirstOrDefault();
-                    using (L51NG1Entities ctx2 = new L51NG1Entities())
-                    {
-                        var comptFunc1 = funcionario1.Competencias.Where(c => c.id == idCompFunc1).SingleOrDefault();
-                        var comptFunc2 = funcionario2.Competencias.Where(c => c.id == idCompFunc2).SingleOrDefault();
+                var funcionario1 = ctx.Funcionarios.Where(f => f.id == idFunc1).SingleOrDefault();
+                var comptFunc1 = funcionario1.Competencias.Where(c => c.id == idCompFunc1).SingleOrDefault();
+                var funcionario2 = ctx.Funcionarios.Where(f => f.id == idFunc2).SingleOrDefault();
+                var comptFunc2 = funcionario2.Competencias.Where(c => c.id == idCompFunc2).SingleOrDefault();
 
-                        funcionario1.Competencias.Remove(comptFunc1);
-                        funcionario2.Competencias.Remove(comptFunc2);
+                var funcionario_1 = ctx2.Funcionarios.Where(f => f.id == idFunc1).SingleOrDefault();
+                var comptFunc_1 = funcionario_1.Competencias.Where(c => c.id == idCompFunc1).SingleOrDefault();
 
-                        funcionario1.Competencias.Add(comptFunc2);
-                        funcionario2.Competencias.Add(comptFunc1);
-                        ctx.SaveChanges();
-                    }
-                    //
-                    //
-                    ctx.SaveChanges();
+                var funcionario_2 = ctx2.Funcionarios.Where(f => f.id == idFunc2).SingleOrDefault();
+                var comptFunc_2 = funcionario_2.Competencias.Where(c => c.id == idCompFunc2).SingleOrDefault();
 
-                    ts.Complete();
-                }
+                funcionario_1.Competencias.Remove(comptFunc_1);
+                funcionario_1.Competencias.Add(comptFunc_2);
+                ctx2.SaveChanges();
+
+
+                funcionario1.Competencias.Remove(comptFunc1);
+                funcionario1.Competencias.Add(comptFunc2);
+                funcionario2.Competencias.Remove(comptFunc2);
+                funcionario2.Competencias.Add(comptFunc1);
+                ctx.SaveChanges();
+                ts.Complete();
             }
         }
 

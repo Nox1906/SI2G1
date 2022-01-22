@@ -480,7 +480,7 @@ warning 6002: The table/view 'L51NG1.dbo.TV_ResumoIntervencoes' does not have a 
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Funcionarios" Relationship="Self.FunCompet" FromRole="Competencias" ToRole="Funcionarios" />
         </EntityType>
@@ -519,7 +519,7 @@ warning 6002: The table/view 'L51NG1.dbo.TV_ResumoIntervencoes' does not have a 
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cc" Type="Int32" Nullable="false" />
           <Property Name="nif" Type="Int32" Nullable="false" />

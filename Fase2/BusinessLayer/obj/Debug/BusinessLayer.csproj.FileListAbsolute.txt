@@ -32,3 +32,5 @@ C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkM
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\EntityFrameworkModel.dll.config
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\ModelInterfaces.dll
 C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\BusinessLayer\bin\Debug\ModelInterfaces.pdb
+C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\ModelInterfaces.dll
+C:\Users\lealr\GitHub\SI2G1\Fase2\BusinessLayer\bin\Debug\ModelInterfaces.pdb
