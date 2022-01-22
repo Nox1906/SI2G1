@@ -49,5 +49,11 @@
     <Compile Include="Intervencao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModelInterfaces\ModelInterfaces.csproj">
+      <Project>{b1d2b485-9715-4ca3-a97f-c22338b9c4bd}</Project>
+      <Name>ModelInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

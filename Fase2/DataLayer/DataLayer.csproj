@@ -46,6 +46,7 @@
     <Compile Include="DataMappers\IMapper.cs" />
     <Compile Include="DataMappers\ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxys\AtivoProxy.cs" />
     <Compile Include="QueryObjects\AtivosMapper.cs" />
     <Compile Include="QueryObjects\EquipaFuncMapper.cs" />
     <Compile Include="QueryObjects\EquipaIntervencaoMapper.cs" />
@@ -56,11 +57,17 @@
     <Compile Include="QueryObjects\Session.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModelInterfaces\ModelInterfaces.csproj">
+      <Project>{b1d2b485-9715-4ca3-a97f-c22338b9c4bd}</Project>
+      <Name>ModelInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{764f9bcb-6923-4d5f-b6f3-0fe09d311da3}</Project>
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

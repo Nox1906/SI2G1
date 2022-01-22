@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Intervencao 
+    public class Intervencao : IIntervencao
     {
         public int id { get; set; }
         public string descricao { get; set; }
@@ -14,7 +15,7 @@ namespace Model
         public DateTime dtInicio { get; set; }
         public DateTime dtFim { get; set; }
         public decimal valor { get; set; }
-        public Ativo Ativo { get; set; }
+        public IAtivo Ativo { get; set; }
 
         public int meses { get; set; }
         public EquipaIntervencao EquipaIntervencao { get; set; }

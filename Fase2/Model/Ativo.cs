@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Ativo
+    public class Ativo :IAtivo 
     {
         public Ativo()
         {
-            this._intervencaos = new List<Intervencao>();
-        }
-
         
+        }
         public int id { get; set; }
         public string nome { get; set; }
         public Nullable<decimal> valor { get; set; }
@@ -25,8 +24,6 @@ namespace Model
         public Nullable<int> parentId { get; set; }
         public int tipoId { get; set; }
         public int gestorId { get; set; }
-
-        public List<Intervencao> _intervencaos { get; set; }
-
+        public List<IIntervencao> _intervencaos { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

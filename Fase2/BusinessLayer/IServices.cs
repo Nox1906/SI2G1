@@ -17,7 +17,8 @@ namespace BusinessLayer
         void insertIntervencao(Intervencao intervencao);
         void insertEquipaIntervencao(Intervencao intervencao, Equipa equipa);
         void changeCompetenciaFunc(int idFunc1, int idFunc2, int idCompFunc1, int idCompFunc2);
-
         void clearTest(int id);
+        void getIntervencao(int id);
+
     }
 }

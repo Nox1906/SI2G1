@@ -65,38 +65,6 @@ namespace DataLayer.QueryObjects
             }
         }
 
-        public List<EquipaIntervencao> ReadAllEquipas(object entity)
-        {
-            List<EquipaIntervencao> equipaIntervencaos = new List<EquipaIntervencao>();
-            openTransactionScope();
-            using (ts)
-            {
-                using (SqlCommand cmd = session.CreateCommand())
-                {
-                    if (session.BeginTran())
-                    {
-                        cmd.CommandText = getAllbyIdEquipaIntervencaoText;
-                        cmd.Parameters.AddWithValue("@equipaId", entity);
-
-                        using (SqlDataReader rd = cmd.ExecuteReader())
-                        {
-                            while (rd.Read())
-                            {
-                                EquipaIntervencao e = new EquipaIntervencao
-                                {
-                                    Intervencao = new Intervencao { id = rd.GetInt32(0) },
-                                    Equipa = new Equipa { Id = rd.GetInt32(1) },
-                                };
-                                equipaIntervencaos.Add(e);
-                            }
-                        }
-                    }
-                }
-                ts.Complete();
-            }
-            return equipaIntervencaos;
-        }
-
         public override EquipaIntervencao ReadById(int id)
         {
             EquipaIntervencao ei = new EquipaIntervencao();

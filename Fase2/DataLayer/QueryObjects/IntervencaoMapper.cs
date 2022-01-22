@@ -1,5 +1,7 @@
 ﻿using DataLayer.DataMappers;
+using DataLayer.Proxys;
 using Model;
+using ModelInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -32,8 +34,7 @@ namespace DataLayer.QueryObjects
         {
             get
             {
-                return "SELECT i.id, i.descricao, i.estado, i.dtInicio, i.dtFim, i.valor, i.ativoId," +
-                    " ip.meses  FROM Intervencao i inner join IntervencaoPeriodica ip on ip.id = i.id where i.id = @id";
+                return "SELECT * FROM INTERVENCAO where id = @id";
             }
         }
 
@@ -121,13 +122,12 @@ namespace DataLayer.QueryObjects
                                 i.dtInicio = rd.GetDateTime(3);
                                 i.dtFim = rd.GetDateTime(4);
                                 i.valor = rd.GetDecimal(5);
-                                i.Ativo = new Ativo { id = rd.GetInt32(6) };
+                                i.Ativo = new AtivoProxy (rd.GetInt32(6), ativoGetter);
                                 i.meses = 0;
                             }
                         }
                     }
                 }
-
                 ts.Complete();
             }
             return i;
@@ -217,6 +217,37 @@ namespace DataLayer.QueryObjects
                 }
             }
             return interventions;
+        }
+
+        private IAtivo ativoGetter(int id)
+        {
+            using (SqlCommand cmd = session.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM Ativos where @id = id";
+                cmd.Parameters.AddWithValue("@id", id);
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        IAtivo ativo = new Ativo()
+                        {
+                            id = rd.GetInt32(0),
+                            nome = rd.GetString(1),
+                            valor = rd.GetDecimal(2),
+                            dtAquisicao = rd.GetDateTime(3),
+                            estado = rd.GetBoolean(4),
+                            marca = rd.GetString(5),
+                            modelo = rd.GetString(6),
+                            localizacao = rd.GetString(7),
+                            parentId = rd.GetInt32(8),
+                            tipoId = rd.GetInt32(9),
+                            gestorId = rd.GetInt32(10),
+                        };
+                        return ativo;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

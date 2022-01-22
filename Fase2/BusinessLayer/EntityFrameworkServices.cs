@@ -86,5 +86,10 @@ namespace BusinessLayer
             efm.DeleteEquipaIntervencao(id);
 
         }
+
+        public void getIntervencao(int id )
+        {
+            throw new NotImplementedException();
+        }
     }
 }

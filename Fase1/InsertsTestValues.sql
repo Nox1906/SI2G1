@@ -49,6 +49,10 @@ INSERT INTO Equipa VALUES (99, 'Teste', 0)
 EXEC dbo.SP_ActualizarElementosEquipa 99,8,'insert', 7
 EXEC dbo.SP_ActualizarElementosEquipa 99,7,'insert', 7
 EXEC dbo.SP_ActualizarElementosEquipa 99,6,'insert', 7
+				EXEC dbo.SP_ActualizarElementosEquipa 1,2,'insert', 3
+				EXEC dbo.SP_ActualizarElementosEquipa 2,1,'insert', 4
+				EXEC dbo.SP_ActualizarElementosEquipa 3,5,'insert', 6
+				UPDATE EquipaIntervencao SET equipaId = 1 WHERE idIntervencao = 2
 
 COMMIT
 

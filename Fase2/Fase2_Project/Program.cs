@@ -64,13 +64,14 @@ namespace Fase2_Project
         {
             Console.WriteLine("Escolha uma opção");
             Console.WriteLine("1 -> Obter equipa livre para uma intervenção");
-            Console.WriteLine("2 -> Inserir Intervencão com procedure");
+            Console.WriteLine("2 -> Inserir Intervenção com procedure");
             Console.WriteLine("3 -> Inserir Equipa");
             Console.WriteLine("4 -> Atualizar Elementos a uma Equipa");
             Console.WriteLine("5 -> Intervenções num ano");
-            Console.WriteLine("6 -> Inserir Intervencão");
+            Console.WriteLine("6 -> Inserir Intervenção");
             Console.WriteLine("7 -> Atribuir intervenção a uma equipa livre");
             Console.WriteLine("8 -> Trocar competencias entre 2 funcionarios");
+            Console.WriteLine("9 -> Teste com getIntervencao e obter Ativo via proxy");
             Console.WriteLine("0 -> Sair para o menu anterior");
         }
 
@@ -101,6 +102,9 @@ namespace Fase2_Project
                     break;
                 case 8:
                     services.changeCompetenciaFunc();
+                    break;
+                case 9:
+                    services.getIntervencao();
                     break;
             }
         }

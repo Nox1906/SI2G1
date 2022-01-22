@@ -66,8 +66,6 @@ namespace DataLayer.QueryObjects
                         }
                     }
                 }
-                IMapper<EquipaIntervencao, int> equipaIntervencaos = new EquipaIntervencaoMapper(session);
-                e.EquipaIntervencaos = ((EquipaIntervencaoMapper)equipaIntervencaos).ReadAllEquipas(id);
                 ts.Complete();
             }
             return e;

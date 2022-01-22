@@ -108,5 +108,17 @@ namespace BusinessLayer
 
             }
         }
+
+        public void getIntervencao(int id)
+        {
+            using (session)
+            {
+                IMapper<Intervencao, int> intervencaoMapper = new IntervencaoMapper(session);
+                Intervencao intervencao = intervencaoMapper.ReadById(id);
+                Console.WriteLine("\nResultado com dados Lazy: " + intervencao.ToString() + "\n");
+                Console.WriteLine("Obtenção de uma das propriedades do Ativo: \n");
+                Console.WriteLine("id: " + intervencao.Ativo.id + "nome: " + intervencao.Ativo.nome + "\n");
+            }
+        }
     }
 }

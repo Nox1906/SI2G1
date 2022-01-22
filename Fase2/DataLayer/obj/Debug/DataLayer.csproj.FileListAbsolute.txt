@@ -16,3 +16,5 @@ C:\Users\lealr\GitHub\SI2G1\Fase2\DataLayer\obj\Debug\DataLayer.csproj.CoreCompi
 C:\Users\lealr\GitHub\SI2G1\Fase2\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
 C:\Users\lealr\GitHub\SI2G1\Fase2\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\lealr\GitHub\SI2G1\Fase2\DataLayer\obj\Debug\DataLayer.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\DataLayer\bin\Debug\ModelInterfaces.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\DataLayer\bin\Debug\ModelInterfaces.pdb

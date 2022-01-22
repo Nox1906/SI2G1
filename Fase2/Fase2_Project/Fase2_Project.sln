@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "..\Busines
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkModel", "..\EntityFrameworkModel\EntityFrameworkModel.csproj", "{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelInterfaces", "..\ModelInterfaces\ModelInterfaces.csproj", "{B1D2B485-9715-4CA3-A97F-C22338B9C4BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC01BDA-BF0B-44F0-802E-815F6ADA6CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1D2B485-9715-4CA3-A97F-C22338B9C4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D2B485-9715-4CA3-A97F-C22338B9C4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D2B485-9715-4CA3-A97F-C22338B9C4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D2B485-9715-4CA3-A97F-C22338B9C4BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

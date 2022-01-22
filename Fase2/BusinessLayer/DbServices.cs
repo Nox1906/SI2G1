@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+
 using System.Transactions;
 using Model;
 
@@ -187,6 +187,26 @@ namespace BusinessLayer
                 }
             }
         }
+
+        public void getIntervencao()
+        {
+            Console.WriteLine("Insira Id da Intervencao \n");
+            openTransactionScope();
+            using (ts)
+            {
+                try
+                {
+                    int id;
+                    while (!Int32.TryParse(Console.ReadLine(), out id))
+                        Console.WriteLine("Valor tem de ser inteiro\n");
+                    servicesContext.getIntervencao(id);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetBaseException().Message);
+                }
+            }
+        }
         public void insertEquipaIntervencao()
         {
             Intervencao intervencao = insertIntervencaoValues();
@@ -209,7 +229,6 @@ namespace BusinessLayer
                 }
             }
         }
-
         public void testes()
         {
             Intervencao intervencao = new Intervencao
@@ -220,7 +239,7 @@ namespace BusinessLayer
                 dtInicio = DateTime.Parse("28-10-2021"),
                 dtFim = DateTime.Parse("02-12-2021"),
                 valor = 50,
-                Ativo = new Ativo { id = 3 },
+                Ativo = new Ativo { id = 2 },
                 meses = 2
             };
             string tipo;

@@ -1,0 +1,6 @@
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\bin\Debug\ModelInterfaces.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\bin\Debug\ModelInterfaces.pdb
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\obj\Debug\ModelInterfaces.csprojAssemblyReference.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\obj\Debug\ModelInterfaces.csproj.CoreCompileInputs.cache
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\obj\Debug\ModelInterfaces.dll
+C:\Faculdade\5 Semestre\SI2\SI2G1\Fase2\ModelInterfaces\obj\Debug\ModelInterfaces.pdb
